@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../framework/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+		<script src="../framework/jquery-2.1.3.js"></script>
+		<script src="../framework/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+		<link rel="stylesheet" href="../framework/qunit-1.17.1.css">
+		<script src="../framework/qunit-1.17.1.js"></script>
+		<script src="../js/navigation.js"></script>
+		<script>
+			QUnit.test("Split URL", function(assert) {
+				var nav = new Navigation();
+				assert.equal(nav.splitUrl("index.html"), "index");
+				assert.equal(nav.splitUrl("index"), "index");
+				assert.equal(nav.splitUrl("index.bestpageever.html"), "indexbestpageever");
+			});
+		</script>
+	</head>
+	<body>
+
+		<div id="qunit">
+			
+		</div>
+		<div id="qunit-fixture">
+
+		</div>
+
+	</body>
+</html>
