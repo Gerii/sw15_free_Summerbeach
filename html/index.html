@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Summerbeach</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../framework/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+		<script src="../framework/jquery-2.1.3.js"></script>
+		<script src="../framework/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+		<script src="../js/navigation.js"></script>
+	</head>
+	<body>
+		<div data-role="page">
+
+			<div id="navpanel" data-position="left" class="jqm-nav-panel jqm-quicklink-panel ui-panel ui-body-a ui-panel-animate ui-panel-open" data-theme="a" data-display="overlay" data-position="right" data-role="panel">
+
+				<div class="ui-panel-inner">
+					<ul class="jqm-list ui-listview ui-group-theme-a" data-icon="false" data-divider-theme="a" data-theme="a" data-inset="false" data-role="listview">
+
+						<li class="ui-li-divider ui-bar-a ui-first-child" data-role="list-divider" role="heading">
+							Turnier
+						</li>
+						<li >
+							<a data-rel="close" class="navbtn ui-btn ui-btn-icon-left ui-btn-a ui-icon-home" id="home.html">Home</a>
+						</li>
+						<li>
+							<a data-rel="close" class="navbtn ui-btn ui-btn-icon-left ui-btn-a ui-icon-calendar" id="sideevents.html">Sideevents</a>
+						</li>
+						<li>
+							<a data-rel="close" class="navbtn ui-btn ui-btn-icon-left ui-btn-a ui-icon-info" id="faq.html">FAQ</a>
+						</li>
+						<li class="ui-li-divider ui-bar-a ui-first-child" data-role="list-divider">
+							Teilnahme
+						</li>
+						<li>
+							<a class="navbtn ui-btn ui-btn-icon-left ui-btn-a ui-icon-edit" id="registration.html">Turnieranmelung</a>
+						</li>
+						<li>
+							<a class="navbtn ui-btn ui-btn-icon-left ui-btn-a ui-icon-user" id="login.html">Login</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div data-role="header">
+				<!-- TODO move icon to the middle -->
+				<a href="#navpanel" data-iconpos="notext" data-icon="bars" class="ui-corner-all"></a>
+
+				<h1>Summerbeach</h1>
+			</div><!-- /header -->
+
+			<div id="content" data-role="content">
+
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4></h4>
+			</div><!-- /footer -->
+
+		</div><!-- /page -->
+	</body>
+</html>
