@@ -16,15 +16,22 @@
 				assert.equal(nav.splitUrl("index.bestpageever.html"), "indexbestpageever");
 				assert.equal(nav.splitUrl(), "");
 			});
+			QUnit.test("Load Page", function(assert) {
+				var nav = new Navigation();
+				nav.loadPage("pageloadertest.html");
+				assert.equal($("#content").html(), "This is a test.");
+			});
 		</script>
 	</head>
 	<body>
 
 		<div id="qunit">
-			
+
 		</div>
 		<div id="qunit-fixture">
-
+			<div id="content">
+				
+			</div>
 		</div>
 
 	</body>
