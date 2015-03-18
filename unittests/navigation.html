@@ -17,11 +17,16 @@
 				assert.equal(nav.splitUrl(), "");
 			});
 			QUnit.test("Load Page", function(assert) {
+				var done = assert.async();
 				var nav = new Navigation();
 				nav.loadPage("pageloadertest.html");
-				assert.equal($("#content").html(), "This is a test.");
+				setTimeout(function(){
+				  assert.equal($("#content").text() , "This is a test.");
+				  assert.equal(window.location.hash, "#pageloadertest");
+				  done();
+				},1000);
 			});
-		</script>
+				</script>
 	</head>
 	<body>
 
@@ -29,8 +34,8 @@
 
 		</div>
 		<div id="qunit-fixture">
-			<div id="content">
-				
+			<div class="test" id="content">
+				Hallo Welt!
 			</div>
 		</div>
 
