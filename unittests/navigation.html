@@ -20,13 +20,29 @@
 				var done = assert.async();
 				var nav = new Navigation();
 				nav.loadPage("pageloadertest.html");
-				setTimeout(function(){
-				  assert.equal($("#content").text() , "This is a test.");
-				  assert.equal(window.location.hash, "#pageloadertest");
-				  done();
-				},1000);
+				setTimeout(function() {
+					assert.equal($("#content").text(), "This is a test.");
+					assert.equal(window.location.hash, "#pageloadertest");
+					done();
+				}, 1000);
 			});
-				</script>
+			QUnit.test("Browser back button", function(assert) {
+				var done = assert.async();
+				var nav = new Navigation();
+				nav.loadPage("browserbacktest.html");
+				setTimeout(function() {
+					nav.loadPage("pageloadertest.html");
+					setTimeout(function() {
+						window.history.back();
+						setTimeout(function() {
+							assert.equal(window.location.hash, "#browserbacktest");
+							assert.equal($("#content").text(), "Juhu we are back.");
+							done();
+						}, 1000);
+					}, 1000);
+				}, 1000);
+			});
+		</script>
 	</head>
 	<body>
 
