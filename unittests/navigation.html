@@ -24,7 +24,11 @@
 					assert.equal($("#content").text(), "This is a test.");
 					assert.equal(window.location.hash, "#pageloadertest");
 					done();
-				}, 1000);
+				}, 100);
+			});
+			QUnit.test("Build Url", function(assert) {
+				var nav = new Navigation();
+				assert.equal(nav.buildUrl("#home"),"home.html");
 			});
 			QUnit.test("Browser back button", function(assert) {
 				var done = assert.async();
@@ -38,10 +42,11 @@
 							assert.equal(window.location.hash, "#browserbacktest");
 							assert.equal($("#content").text(), "Juhu we are back.");
 							done();
-						}, 1000);
-					}, 1000);
-				}, 1000);
+						}, 100);
+					}, 100);
+				}, 100);
 			});
+
 		</script>
 	</head>
 	<body>
