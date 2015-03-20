@@ -1,0 +1,2 @@
+cp "/home/gery/Dokumente/SS 2015/Slany/sw15_free_kB/" /opt/lampp/htdocs/ -fR
+cp "/home/gery/Dokumente/SS 2015/Slany/sw15_free_kB/server/"* /opt/lampp/htdocs/map/app/ -fR
