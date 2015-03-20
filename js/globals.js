@@ -1,0 +1,6 @@
+
+ team = {
+	name: "",
+	school: "",
+	members: []
+};

@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../framework/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+		<script src="../framework/jquery-2.1.3.js"></script>
+		<script src="../framework/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+		<link rel="stylesheet" href="../framework/qunit-1.17.1.css">
+		<script src="../framework/qunit-1.17.1.js"></script>
+		<script src="../js/navigation.js"></script>
+		<script>
+			QUnit.test("Load Page", function(assert) {
+				var done = assert.async();
+				
+				setTimeout(function() {
+					assert.equal($("#content").text(), "This is a test.");
+					assert.equal(window.location.hash, "#pageloadertest");
+					done();
+				}, 100);
+			});
+			
+		</script>
+	</head>
+	<body>
+
+		<div id="qunit">
+
+		</div>
+		<div id="qunit-fixture">
+			<div class="test" id="content">
+				Hallo Welt!
+			</div>
+		</div>
+
+	</body>
+</html>

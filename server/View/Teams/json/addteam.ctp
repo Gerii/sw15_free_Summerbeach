@@ -1,4 +1,3 @@
 <?php
-    json_encode($teams, JSON_PRETTY_PRINT);
-
+    echo json_encode($teams);
 ?>
