@@ -1,4 +1,6 @@
+<link rel="stylesheet" href="../css/registration.css" />
 <div id="addplayer">
+	<h1 id="captainCaption" style="display:none;">Teamkapitän</h1>
 	<div class="ui-field-contain">
 		<form id="form_addplayer" action="javascript:addMember();">
 			<input id="firstname" class="textinput-fc" placeholder="Vorname" value="" type="text" required>
@@ -6,7 +8,7 @@
 			<input id="secondname" class="textinput-fc" placeholder="Nachname" value="" type="text" required>
 			<br/>
 			<label for="bday">Geburtsdatum </label>
-			<input id="dateofbirth" class="textinput-fc" placeholder="01.01.1995" value="" type="date" required>
+			<input id="dateofbirth" class="textinput-fc" value="" type="date" min="1950-01-01" max="2002-01-01" required>
 			<br/>
 			<select name="gender" id="gender">
 				<option value="male">Männlich</option>
@@ -20,7 +22,7 @@
 			<br/>
 			<input id="phone" class="textinput-fc" placeholder="0664 123 45 67" value="" type="tel" required>
 			<br/>
-			<input id="email" class="textinput-fc" placeholder="your@email.at" value="" type="text" required>
+			<input id="email" class="textinput-fc" placeholder="your@email.at" value="" type="email"  style="display:none;" required>
 			<br/>
 			<label for="bday">Playershirt €x </label>
 			<select name="tshirt" id="tshirt">
@@ -32,9 +34,6 @@
 			</select>
 			<br/>
 			<input type="submit" class="ui-shadow ui-btn ui-corner-all" id="addMember" value= "Spieler hinzufügen" style="display:none;"/>
-			<button class="ui-shadow ui-btn ui-corner-all" id="removeMember">
-				Spieler entfernen
-			</button>
 			<br/>
 			<input type="submit" class="ui-shadow ui-btn ui-corner-all" id="registerTeam" value="Absenden" style="display:none;"/>
 		</form>

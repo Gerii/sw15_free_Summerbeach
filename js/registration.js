@@ -27,33 +27,39 @@ function register() {
 
 
 $(document).ready(function() {
-	$("#addteam").on("click", function() {
-		addTeam();
-		console.log("call addplayer.html");
-		var nav = new Navigation();
-		nav.loadPage("addplayer.html");
-	});
 
-	/*$("#addMember").on("click", function() {
-		addMembers();
-		var nav = new Navigation();
-		nav.loadPage("addplayer.html");
-
-		if (team.members.length < 7) {
-			$("#addMember").show();
-		}
-
-	});*/
+	if (team.members.length === 0) {
+		$("#captainCaption").show();
+		$("#email").show();
+	} else {
+		$("#email").removeAttr("required");
+	}
 
 	if (team.members.length < 7) {
 		$("#addMember").show();
 	}
-
+	
+	//Safari hack
+	if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+		var forms = document.getElementsByTagName('form');
+		for (var i = 0; i < forms.length; i++) {
+			forms[i].noValidate = true;
+			forms[i].addEventListener('submit', function(event) {
+				//Prevent submission if checkValidity on the form returns false.
+				if (!event.target.checkValidity()) {
+					event.preventDefault();
+					alert("Bitte fülle alle benötigten Felder aus!");
+				}
+			}, false);
+		}
+	}
 });
 
 function addTeam() {
 	team.name = $("#teamname").val();
 	team.school = $("#schule").val();
+	var nav = new Navigation();
+	nav.loadPage("addplayer.html");
 }
 
 function getMember() {
