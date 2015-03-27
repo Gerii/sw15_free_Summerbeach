@@ -1,18 +1,39 @@
 function register() {
-
 	console.log("call register");
-	var teamname = $("#teamname").val();
-	var schule = $("#schule").val();
-
-	console.log("team: " + teamname + " schule: " + schule);
 
 	$.ajax({
 		type : "POST",
 		url : "http://" + $(location).attr('host') + "/Cakephp/Teams/addteam",
 		dataType : "json",
 		data : {
-			"teamname" : teamname,
-			"schule" : schule
+			"name": team.name,
+			"school": team.school
+		},
+		async : false,
+		success : function(msg) {
+			console.log("success");
+		},
+		error : function(err) {
+			console.log("error");
+			console.log(err);
+		}
+	});
+	
+	$.ajax({
+		type : "POST",
+		url : "http://" + $(location).attr('host') + "/Cakephp/Spielers/addmember",
+		dataType : "json",
+		data : {
+			"firstname": team.members[0].firstname,
+			"secondname": team.members[0].secondname,
+			"dateofbirth": team.members[0].dateofbirth,
+			"address": team.members[0].address,
+			"zip": team.members[0].zip,
+			"location": team.members[0].location,
+			"phone": team.members[0].phone,
+			"tshirt": team.members[0].tshirt,
+			"email": team.members[0].email,
+			"gender": team.members[0].gender
 		},
 		async : false,
 		success : function(msg) {
@@ -24,6 +45,11 @@ function register() {
 		}
 	});
 }
+
+$("#registerTeam").on("click", function() {
+	console.log("registering");
+	register();
+});
 
 
 $(document).ready(function() {
@@ -38,7 +64,11 @@ $(document).ready(function() {
 	if (team.members.length < 7) {
 		$("#addMember").show();
 	}
-	
+
+	if (team.members.length > 3) {
+		$("#registerTeam").show();
+	}
+
 	//Safari hack
 	if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
 		var forms = document.getElementsByTagName('form');
@@ -74,7 +104,7 @@ function getMember() {
 		location : $("#location").val(),
 		phone : $("#phone").val(),
 		email : $("#email").val(),
-		shirt : $("#tshirt").val()
+		tshirt : $("#tshirt").val()
 	};
 }
 

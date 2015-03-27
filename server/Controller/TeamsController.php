@@ -15,18 +15,21 @@ class TeamsController extends AppController {
 	public $scaffold;
 
 public $components = array('Session', 'RequestHandler');
-
+	
 	public function addteam() {
 		$lastid = 0;
 		$db = ConnectionManager::getDataSource('default');
-		if (!empty($_POST["teamname"]) && !empty($_POST["schule"])) {
+		if (!empty($_POST["name"]) && !empty($_POST["school"])) {
 			$result = "";
-			$queryData = "INSERT INTO `teams`(`id`, `teamname`, `schule`) VALUES ('','" . $_POST['teamname'] . "','" . $_POST['schule'] . "')";
-			$result = $db -> query($queryData);
+			$queryData = "INSERT INTO `teams`(`id`, `teamname`, `schule`) VALUES ('NULL','" . $_POST['name'] . "','" . $_POST['school'] . "')";
+			$result = $db -> query($queryData);			
+			$team_id = $mysqli->insert_id;
+			echo $team_id;
+						
       //echo $result;
-			$queryData = "SELECT * FROM `teams`";
+			//$queryData = "SELECT `id` FROM `teams` where ";
       //echo $queryData;
-			$lastid = $db->query($queryData);
+			//$lastid = $db->query($queryData);
       $obj = new stdClass();
       //$obj->result = "success"; //TODO check if succeeded
       http_response_code(201);
