@@ -36,13 +36,20 @@ Navigation.prototype.loadPage = function(url) {
 		team.reset();
 	}
 	jQuery.mobile.navigate(tag);
-	$.post(url, {
-		sort : "",
-		page : ""
-	}, function(result) {
-		console.log(result);
-		$("#content").html(result);
-	}, "html");
+	$.ajax({
+		type : "GET",
+		url : url,
+		success : function(result) {
+			console.log(result);
+			$("#content").html(result);
+		},
+		async : true
+	});
+	/*
+	 $.post(url, function(result) {
+	 console.log(result);
+	 $("#content").html(result);
+	 }, "html");*/
 };
 
 Navigation.prototype.buildUrl = function(hash) {
