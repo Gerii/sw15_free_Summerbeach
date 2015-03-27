@@ -2,5 +2,10 @@
  team = {
 	name: "",
 	school: "",
-	members: []
+	members: [],
+	reset: function(){
+		this.name = "";
+		this.school = "";
+		this.members.length = 0;
+	}
 };

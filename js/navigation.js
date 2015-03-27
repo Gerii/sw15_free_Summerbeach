@@ -9,7 +9,7 @@ $(document).on("pagebeforeshow", function() {
 });
 
 Navigation = function() {
-//	this.loadPage("home.html");
+	//	this.loadPage("home.html");
 	if (arguments.callee._singletonInstance)
 		return arguments.callee._singletonInstance;
 	this.loadPage("home.html");
@@ -18,7 +18,7 @@ Navigation = function() {
 
 Navigation.prototype.splitUrl = function(url) {
 	console.log(url);
-	if(url == undefined) {
+	if (url == undefined) {
 		return "";
 	}
 	var urls = url.split(".");
@@ -32,6 +32,9 @@ Navigation.prototype.splitUrl = function(url) {
 
 Navigation.prototype.loadPage = function(url) {
 	var tag = "#" + this.splitUrl(url);
+	if (tag === "#registration") {
+		team.reset();
+	}
 	jQuery.mobile.navigate(tag);
 	$.post(url, {
 		sort : "",
@@ -43,7 +46,7 @@ Navigation.prototype.loadPage = function(url) {
 };
 
 Navigation.prototype.buildUrl = function(hash) {
-    return hash.substr(1,hash.length) + ".html" ;
+	return hash.substr(1, hash.length) + ".html";
 };
 
 $(window).on("navigate", function(event, data) {
@@ -56,7 +59,6 @@ $(window).on("navigate", function(event, data) {
 			page : ""
 		}, function(result) {
 			console.log(result);
-			// Instead of calling the div name, I need to be able to target it with $(this) and .parent() to make sure only 1 video change, but for now I only want the response to replace the video
 			$("#content").html(result);
 		}, "html");
 		console.log(data.state.info);

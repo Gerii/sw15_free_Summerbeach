@@ -29,11 +29,12 @@ function register() {
 $(document).ready(function() {
 	$("#addteam").on("click", function() {
 		addTeam();
+		console.log("call addplayer.html");
 		var nav = new Navigation();
 		nav.loadPage("addplayer.html");
 	});
 
-	$("#addMember").on("click", function() {
+	/*$("#addMember").on("click", function() {
 		addMembers();
 		var nav = new Navigation();
 		nav.loadPage("addplayer.html");
@@ -42,22 +43,20 @@ $(document).ready(function() {
 			$("#addMember").show();
 		}
 
-	});
-	
-	if (team.members.length < 7) {
-			$("#addMember").show();
-		}
+	});*/
 
+	if (team.members.length < 7) {
+		$("#addMember").show();
+	}
 
 });
 
 function addTeam() {
 	team.name = $("#teamname").val();
 	team.school = $("#schule").val();
-	;
 }
 
-function addMember() {
+function getMember() {
 
 	return {
 		firstname : $("#firstname").val(),
@@ -67,15 +66,18 @@ function addMember() {
 		address : $("#address").val(),
 		zip : $("#zip").val(),
 		location : $("#location").val(),
-		phone : $("#pone").val(),
+		phone : $("#phone").val(),
 		email : $("#email").val(),
-		shirt : $("#shirt").val()
+		shirt : $("#tshirt").val()
 	};
 }
 
-function addMembers() {
+function addMember() {
 	if (team.members.length < 7) {
-		team.members[team.members.length] = addMember();
+		console.log("addMember");
+		team.members[team.members.length] = getMember();
+		var nav = new Navigation();
+		nav.loadPage("addplayer.html");
 	} else {
 
 	}
