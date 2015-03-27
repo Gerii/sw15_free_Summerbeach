@@ -19,10 +19,10 @@
 			QUnit.test("Load Page", function(assert) {
 				var done = assert.async();
 				var nav = new Navigation();
-				nav.loadPage("pageloadertest.html");
+				nav.loadPage("pageloader.html");
 				setTimeout(function() {
 					assert.equal($("#content").text(), "This is a test.");
-					assert.equal(window.location.hash, "#pageloadertest");
+					assert.equal(window.location.hash, "#pageloader");
 					done();
 				}, 100);
 			});
@@ -33,13 +33,13 @@
 			QUnit.test("Browser back button", function(assert) {
 				var done = assert.async();
 				var nav = new Navigation();
-				nav.loadPage("browserbacktest.html");
+				nav.loadPage("browserback.html");
 				setTimeout(function() {
-					nav.loadPage("pageloadertest.html");
+					nav.loadPage("pageloader.html");
 					setTimeout(function() {
 						window.history.back();
 						setTimeout(function() {
-							assert.equal(window.location.hash, "#browserbacktest");
+							assert.equal(window.location.hash, "#browserback");
 							assert.equal($("#content").text(), "Juhu we are back.");
 							done();
 						}, 100);

@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../framework/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+		<script src="../framework/jquery-2.1.3.js"></script>
+		<script src="../framework/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+		<link rel="stylesheet" href="../framework/qunit-1.17.1.css">
+		<script src="../framework/qunit-1.17.1.js"></script>
+		<script src="../js/navigation.js"></script>
+		<script src="../js/globals.js"></script>
+
+		<script>
+			QUnit.test("Clear team data", function(assert) {
+				var nav = new Navigation();
+				team.school = "Testschule";
+				team.name = "Testname";
+				team.members[0] = {
+					address : "Testadresse",
+					dateofbirth : "2015-03-27",
+					email : "test@email.at",
+					firstname : "Testvorname",
+					gender : "female",
+					location : "Testplz",
+					phone : "0664 123 45 67",
+					secondname : "Testnachname",
+					shirt : "M",
+					zip : "8010"
+				};
+				assert.equal(team.school, "Testschule", "name of school");
+				assert.equal(team.name, "Testname", "name of team");
+				assert.equal(team.members.length, 1, "length of member array = 1");
+
+				nav.loadPage("registration.html");
+
+				assert.equal(team.school, "", "cleared school");
+				assert.equal(team.name, "", "cleared name of team");
+				assert.equal(team.members.length, 0, "cleared all members");
+
+			});
+
+		</script>
+	</head>
+	<body>
+
+		<div id="qunit">
+
+		</div>
+		<div id="qunit-fixture">
+			<div class="test" id="content">
+				Hallo Welt!
+			</div>
+		</div>
+
+	</body>
+</html>
