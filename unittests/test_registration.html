@@ -21,7 +21,7 @@
 					email : "test@email.at",
 					firstname : "Testvorname",
 					gender : "female",
-					location : "Testplz",
+					location : "Testort",
 					phone : "0664 123 45 67",
 					secondname : "Testnachname",
 					shirt : "M",
@@ -38,7 +38,38 @@
 				assert.equal(team.members.length, 0, "cleared all members");
 
 			});
+			QUnit.test("Insert team data", function(assert) {
+				var nav = new Navigation();
+				team.school = "Testschule";
+				team.name = "Testname";
+				team.members[0] = {
+					address : "Testadresse",
+					dateofbirth : "2015-03-27",
+					email : "test@email.at",
+					firstname : "Testvorname",
+					gender : "female",
+					location : "Testort",
+					phone : "0664 123 45 67",
+					secondname : "Testnachname",
+					shirt : "M",
+					zip : "8010"
+				};
+				assert.equal(team.school, "Testschule", "name of school");
+				assert.equal(team.name, "Testname", "name of team");
+				assert.equal(team.members.length, 1, "length of member array = 1");
 
+				assert.equal(team.members[0].address, "Testadresse", "address of member");
+				assert.equal(team.members[0].dateofbirth, "2015-03-27", "date of birth of member");
+				assert.equal(team.members[0].email, "test@email.at", "email of member");
+				assert.equal(team.members[0].firstname, "Testvorname", "firstname of member");
+				assert.equal(team.members[0].gender, "female", "gender of member");
+				assert.equal(team.members[0].location, "Testort", "location of member");
+				assert.equal(team.members[0].phone, "0664 123 45 67", "phone of member");
+				assert.equal(team.members[0].secondname, "Testnachname", "secondname of member");
+				assert.equal(team.members[0].shirt, "M", "shirt-size of member");
+				assert.equal(team.members[0].zip, "8010", "zip of member");
+		
+			});
 		</script>
 	</head>
 	<body>
