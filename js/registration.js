@@ -7,7 +7,8 @@ function register() {
 		dataType : "json",
 		data : {
 			"name": team.name,
-			"school": team.school
+			"school": team.school,
+			"members": team.members
 		},
 		async : false,
 		success : function(msg) {
@@ -19,7 +20,7 @@ function register() {
 		}
 	});
 	
-	$.ajax({
+	/*$.ajax({
 		type : "POST",
 		url : "http://" + $(location).attr('host') + "/Cakephp/Spielers/addmember",
 		dataType : "json",
@@ -43,7 +44,7 @@ function register() {
 			console.log("error");
 			console.log(err);
 		}
-	});
+	});*/
 }
 
 $("#registerTeam").on("click", function() {
