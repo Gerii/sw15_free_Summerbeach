@@ -34,8 +34,28 @@ class TeamsControllerTest extends ControllerTestCase {
 		$this -> testAction('/Teams/addteam.json', array('data' => $data, 'method' => 'post'));
 		$after = $this -> Team -> find('count', array('conditions' => array('Team.teamname' => $team, 'Team.schule' => $school)));
 
-		// Test DB entry
 		$this -> assertEqual($after - $before, 1);
 	}
 
+	public function testAddTeamNoTeamName() {
+		$team = "";
+		$school = "bluuub";
+		$data = array('name' => $team, 'school' => $school, 'members' => array());
+		$before = $this -> Team -> find('count', array('conditions' => array('Team.teamname' => $team, 'Team.schule' => $school)));
+		$this -> testAction('/Teams/addteam.json', array('data' => $data, 'method' => 'post'));
+		$after = $this -> Team -> find('count', array('conditions' => array('Team.teamname' => $team, 'Team.schule' => $school)));
+
+		$this -> assertEqual($after - $before, 0);
+	}
+	
+		public function testAddTeamNoSchoolName() {
+		$team = "blub";
+		$school = "";
+		$data = array('name' => $team, 'school' => $school, 'members' => array());
+		$before = $this -> Team -> find('count', array('conditions' => array('Team.teamname' => $team, 'Team.schule' => $school)));
+		$this -> testAction('/Teams/addteam.json', array('data' => $data, 'method' => 'post'));
+		$after = $this -> Team -> find('count', array('conditions' => array('Team.teamname' => $team, 'Team.schule' => $school)));
+
+		$this -> assertEqual($after - $before, 0);
+	}
 }
