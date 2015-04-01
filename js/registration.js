@@ -6,50 +6,52 @@ function register() {
 		url : "http://" + $(location).attr('host') + "/Cakephp/Teams/addteam",
 		dataType : "json",
 		data : {
-			"name": team.name,
-			"school": team.school,
-			"members": team.members
+			"name" : team.name,
+			"school" : team.school,
+			"members" : team.members
 		},
 		async : false,
 		success : function(msg) {
-			console.log("success");
+			console.log(msg);
+			if (msg !== "noerror") {
+				handleError(msg);
+			}
 		},
 		error : function(err) {
 			console.log("error");
 			console.log(err);
+			handleError(err);
 		}
 	});
-	
-	/*$.ajax({
-		type : "POST",
-		url : "http://" + $(location).attr('host') + "/Cakephp/Spielers/addmember",
-		dataType : "json",
-		data : {
-			"firstname": team.members[0].firstname,
-			"secondname": team.members[0].secondname,
-			"dateofbirth": team.members[0].dateofbirth,
-			"address": team.members[0].address,
-			"zip": team.members[0].zip,
-			"location": team.members[0].location,
-			"phone": team.members[0].phone,
-			"tshirt": team.members[0].tshirt,
-			"email": team.members[0].email,
-			"gender": team.members[0].gender
-		},
-		async : false,
-		success : function(msg) {
-			console.log("success");
-		},
-		error : function(err) {
-			console.log("error");
-			console.log(err);
-		}
-	});*/
 }
+
+function handleError(errorMsg) {
+	var nav = new Navigation();
+	nav.loadPage("registration.html");
+	switch(errorMsg) {
+	case errorCodes.schoolNameMissing:
+		alert(errorMessages.schoolNameMissing);
+		break;
+	case errorCodes.teamNameMissing:
+		alert(errorMessages.teamNameMissing);
+		break;
+	case errorCodes.wrongPlayerData:
+		alert(errorMessages.wrongPlayerData);
+		break;
+	default:
+		alert(errorMessages.unknownError);
+		break;
+	}
+}
+
 
 $("#registerTeam").on("click", function() {
 	console.log("registering");
 	register();
+});
+$("#addMember").on("click", function() {
+	console.log("adding member");
+	addMember();
 });
 
 
@@ -118,4 +120,9 @@ function addMember() {
 	} else {
 
 	}
+}
+
+
+function nothing(){
+	
 }
