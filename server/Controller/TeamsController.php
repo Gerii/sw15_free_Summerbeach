@@ -25,44 +25,70 @@ class TeamsController extends AppController {
 		$spielersController = new SpielersController;
 		$spielersController -> constructClasses();
 
-		//foreach ($this -> request ->data["members"] as $value)
+		$error = "noerror";
+
+		if ($team -> teamname == "") {
+			http_response_code(400);
+			$error = "TeamNameMissing";
+		} else if ($team -> schule == "") {
+			$error = "SchoolNameMissing";
+			http_response_code(400);
+		} else if ($this -> checkMembers($this -> request -> data["members"]) == 1) {
+			$error = "WrongPlayerData";
+			debug("Wrong player data!!!");
+			http_response_code(201);
+		} else {
+
+			//foreach ($this -> request ->data["members"] as $value)
 			//$spielersController -> checkMember($value);
 
-		$db = ConnectionManager::getDataSource('default');
-		if (!empty($_POST["name"]) && !empty($_POST["school"])) {
-			$result = "";
-			//echo json_encode($this -> Team -> find('all'));
-			//echo json_encode($this -> request -> data);
 			if ($this -> Team -> save($team)) {
 				$this -> Session -> setFlash('Team saved');
 			} else {
 				$this -> Session -> setFlash('Team not saved');
 			}
-			//$queryData = "INSERT INTO `teams`(`id`, `teamname`, `schule`) VALUES ('NULL','" . $_POST['name'] . "','" . $_POST['school'] . "')";
-			//$result = $db -> query($queryData);
-
-			//$teamid = $db -> query("SELECT LAST_INSERT_ID() AS id");
-			//echo mysql_insert_id();
-			//echo json_encode($teamid);
 
 			$counter = 0;
 			foreach ($this -> request ->data["members"] as $value) {
 				$counter++;
 				$spielersController -> addMember($this -> Team -> getLastInsertID(), $value, $counter);
 			}
-			//echo $result;
-			//$queryData = "SELECT `id` FROM `teams` where ";
-			//echo $queryData;
-			//$lastid = $db->query($queryData);
-			$obj = new stdClass();
-			//$obj->result = "success"; //TODO check if succeeded
+
 			http_response_code(201);
-		} else {
-			http_response_code(400);
 		}
-		$this -> set('teams', 0);
+		$this -> set('teams', $error);
 		$this -> set(array('teams'));
 
+	}
+
+	function checkMembers($members) {
+		debug("checking member");
+		$counter = 0;
+		foreach ($members as $value) {
+			$counter++;
+			if ($value["firstname"] == "")
+				return 1;
+			else if ($value["secondname"] == "")
+				return 1;
+			else if (($counter == 1) && (($value["email"] == "") || !filter_var($value["email"], FILTER_VALIDATE_EMAIL)))
+				return 1;
+			else if ($value["phone"] == "")
+				return 1;
+			else if ($value["dateofbirth"] == "" || $this->checkDateOfBirth($value["dateofbirth"]) == 1)
+				return 1;
+		}
+
+		return 0;
+	}
+
+	function checkDateOfBirth($player_date) {
+		$start_date = strtotime('1960-01-01');
+		$end_date = strtotime('2001-12-31');
+		$player_date = strtotime($player_date);
+
+		if ($player_date >= $end_date || $player_date <= $start_date)
+			return 1;
+		return 0;
 	}
 
 }
