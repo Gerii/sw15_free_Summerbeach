@@ -70,13 +70,67 @@ class SpielersControllerTest extends ControllerTestCase {
 		$team_id = 1;
 		$playernumber = 1;
 		$firstname = "";
-		$lastname = "Mustermann";
-		$dateofbirth = "05.10.2736";
+		$lastname = "";
+		$dateofbirth = "05.10.1992";
 		$phone = "2342564";
 		$address = "Inffeldgasse";
 		$zip = 8010;
 		$location = "Graz";
 		$email = "johann.mustermann@email.at";
+		$gender = "m";
+		$tshirt = "s";
+		$data = array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt);
+
+		$this -> assertEqual($this -> insertMember($team_id, $data, $playernumber), 0);
+	}
+
+	public function testAddMemberEmptyEmailCaptain() {
+		$team_id = 1;
+		$playernumber = 1;
+		$firstname = "Cpt";
+		$lastname = "blub";
+		$dateofbirth = "05.10.1992";
+		$phone = "2342564";
+		$address = "Inffeldgasse";
+		$zip = 8010;
+		$location = "Graz";
+		$email = "";
+		$gender = "m";
+		$tshirt = "s";
+		$data = array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt);
+
+		$this -> assertEqual($this -> insertMember($team_id, $data, $playernumber), 0);
+	}
+
+	public function testAddMemberEmptyEmailNonCaptain() {
+		$team_id = 1;
+		$playernumber = 2;
+		$firstname = "bla";
+		$lastname = "blub";
+		$dateofbirth = "05.10.1992";
+		$phone = "2342564";
+		$address = "Inffeldgasse";
+		$zip = 8010;
+		$location = "Graz";
+		$email = "";
+		$gender = "m";
+		$tshirt = "s";
+		$data = array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt);
+
+		$this -> assertEqual($this -> insertMember($team_id, $data, $playernumber), 1);
+	}
+
+	public function testAddMemberEmptyPhone() {
+		$team_id = 1;
+		$playernumber = 2;
+		$firstname = "bla";
+		$lastname = "blub";
+		$dateofbirth = "05.10.1992";
+		$phone = "";
+		$address = "Inffeldgasse";
+		$zip = 8010;
+		$location = "Graz";
+		$email = "";
 		$gender = "m";
 		$tshirt = "s";
 		$data = array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt);
