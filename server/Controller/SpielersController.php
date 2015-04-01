@@ -7,48 +7,62 @@ App::uses('ConnectionManager', 'Model');
  */
 class SpielersController extends AppController {
 
-/**
- * Scaffold
- *
- * @var mixed
- */
+	/**
+	 * Scaffold
+	 *
+	 * @var mixed
+	 */
 	public $scaffold;
-		
-	
-public $components = array('Session', 'RequestHandler');
-	
-	public function addmember() {
-		$lastid = 0;
+
+	public $components = array('Session', 'RequestHandler');
+
+	public function addmember($teamid, $member, $playernumber) {
 		$db = ConnectionManager::getDataSource('default');
+
+		$memberGerman = new stdClass;
+		$memberGerman -> team_id = $teamid;
+		$memberGerman -> spielernummer = $playernumber;
+		$memberGerman -> vorname = $member["firstname"];
+		$memberGerman -> nachname = $member["secondname"];
+		$memberGerman -> geburtsdatum = $member["dateofbirth"];
+		$memberGerman -> telefon = $member["phone"];
+		$memberGerman -> strasse = $member["address"];
+		$memberGerman -> plz = $member["zip"];
+		$memberGerman -> ort = $member["location"];
+		$memberGerman -> email = $member["email"];
+		$memberGerman -> geschlecht = $member["gender"];
+		$memberGerman -> shirt = $member["tshirt"];
 		
-		// echo "add member test";
-		
-		if (!empty($_POST["firstname"]) && !empty($_POST["secondname"]) && !empty($_POST["dateofbirth"]) && !empty($_POST["phone"])) {
-		  
-		 // echo "add member test not empty";
-		 
-	    $result = "";
-		$team_id = 1;
+
+		//echo json_encode($memberGerman);
+
+		//$memberDict = array("firstname" => "vorname", "secondname" => "nachname", "dateofbirth" => "geburtsdatum", "phone" => "telefon", "address" => "strasse", "zip" => "plz", "location" => "ort", "email" => "email", "gender" => "geschlecht", "tshirt" => "shirt");
+
+		// echo "add member test not empty";
+
+		$this -> Spieler -> create();
+		if ($this -> Spieler -> save($memberGerman)) {
+			echo "member saved";
+			$this -> Session -> setFlash('Member saved');
+		} else {
+			echo "not saved";
+			$this -> Session -> setFlash('Member not saved');
+		}
+
+		$result = "";
 		$i = 1;
-		$queryData = "INSERT INTO `spieler` (`id`, `team_id`, `spielernummer`, `vorname`, `nachname`, `geburtsdatum`, `telefon`, `strasse`, `plz`, `ort`, `email`, `geschlecht`, `shirt`) VALUES ('NULL','" . $team_id . "','" .$i . "','". $_POST['firstname']."','". $_POST['secondname']."','".$_POST['dateofbirth']."','".$_POST['phone']."','".$_POST['address']."','".$_POST['zip']."','".$_POST['location']."','".$_POST['email']."','".$_POST['gender']."','".$_POST['tshirt']."')";
-		$result = $db -> query($queryData);			
-			$team_id = $mysqli->insert_id;
-			echo $team_id;
-						
-      //echo $result;
-			//$queryData = "SELECT `id` FROM `teams` where ";
-      //echo $queryData;
-			//$lastid = $db->query($queryData);
-      $obj = new stdClass();
-      //$obj->result = "success"; //TODO check if succeeded*/
-      
-      
-      http_response_code(201);
-    }
-    else {
-      http_response_code(400);
-    }
-		$this -> set('teams' ,$result);
+		/*$queryData = "INSERT INTO `spieler` (`id`, `team_id`, `spielernummer`, `vorname`, `nachname`, `geburtsdatum`, `telefon`,
+		 `strasse`, `plz`, `ort`, `email`, `geschlecht`, `shirt`) VALUES
+		 ('NULL','" . $team_id . "','" . $i . "','" . $member -> firstname . "','" . $member -> secondname . "','" . $member -> dateofbirth . "','" . $member -> phone . "','" . $member -> address . "','" . $member -> zip . "','" . $member -> location . "','" . $member -> email . "','" . $member -> gender . "','" . $member -> tshirt . "')";
+		 $result = $db -> query($queryData);
+		 */
+		//echo $result;
+		//$queryData = "SELECT `id` FROM `teams` where ";
+		//echo $queryData;
+		//$lastid = $db->query($queryData);
+		//$obj->result = "success"; //TODO check if succeeded*/
+
+		$this -> set('teams', 0);
 		$this -> set(array('teams'));
 
 	}
