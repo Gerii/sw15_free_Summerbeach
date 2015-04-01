@@ -10,7 +10,7 @@ class SpielerFixture extends CakeTestFixture {
  *
  * @var string
  */
-	public $table = 'spieler';
+	public $table = 'spieler_test';
 
 /**
  * Fields
