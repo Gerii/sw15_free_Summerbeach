@@ -26,7 +26,7 @@ class TeamsControllerTest extends ControllerTestCase {
 	 *
 	 * @return void
 	 */
-	public function testAddteam() {
+	public function testAddTeam() {
 		$team = "blub";
 		$school = "bluuub";
 		$data = array('name' => $team, 'school' => $school, 'members' => array());
