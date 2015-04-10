@@ -24,7 +24,7 @@ class TeamsController extends AppController {
 		$team -> schule = $this -> request -> data["school"];
 		$spielersController = new SpielersController;
 		$spielersController -> constructClasses();
-
+		
 		$error = "noerror";
 
 		if ($team -> teamname == "") {
@@ -33,10 +33,15 @@ class TeamsController extends AppController {
 		} else if ($team -> schule == "") {
 			$error = "SchoolNameMissing";
 			http_response_code(400);
-		} else if ($this -> checkMembers($this -> request -> data["members"]) == 1) {
+		} else if(count($this -> request ->data["members"]) < 4 || count($this -> request ->data["members"]) > 7) {
+			$error = "WrongPlayerCount";
+			debug("Wrong number of players");
+			http_response_code(400);
+		}
+		else if ($this -> checkMembers($this -> request -> data["members"]) == 1) {
 			$error = "WrongPlayerData";
 			debug("Wrong player data!!!");
-			http_response_code(201);
+			http_response_code(400);
 		} else {
 
 			//foreach ($this -> request ->data["members"] as $value)

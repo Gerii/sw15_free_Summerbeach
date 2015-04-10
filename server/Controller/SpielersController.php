@@ -42,10 +42,8 @@ class SpielersController extends AppController {
 
 		$this -> Spieler -> create();
 		if ($this -> Spieler -> save($memberGerman)) {
-			echo "member saved";
 			$this -> Session -> setFlash('Member saved');
 		} else {
-			echo "not saved";
 			$this -> Session -> setFlash('Member not saved');
 		}
 

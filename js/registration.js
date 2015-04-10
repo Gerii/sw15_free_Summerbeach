@@ -38,6 +38,9 @@ function handleError(errorMsg) {
 	case errorCodes.wrongPlayerData:
 		alert(errorMessages.wrongPlayerData);
 		break;
+	case errorCodes.wrongPlayerCount:
+		alert(errorMessages.wrongPlayerCount);
+		break;
 	default:
 		alert(errorMessages.unknownError);
 		break;
