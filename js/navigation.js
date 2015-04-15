@@ -42,6 +42,7 @@ Navigation.prototype.loadPage = function(url) {
 		success : function(result) {
 			console.log(result);
 			$("#content").html(result);
+			$("#content").trigger("create");
 		},
 		async : true
 	});

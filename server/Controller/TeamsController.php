@@ -2,6 +2,8 @@
 App::uses('AppController', 'Controller');
 App::uses('ConnectionManager', 'Model');
 App::uses('SpielersController', 'Controller');
+App::uses('RefereesController', 'Controller');
+
 /**
  * Teams Controller
  *
@@ -15,7 +17,12 @@ class TeamsController extends AppController {
 	 */
 	public $scaffold;
 
-	public $components = array('Session', 'RequestHandler');
+	public $components = array('Session', 'RequestHandler', 'Auth');
+
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this -> Auth -> allow();
+	}
 
 	public function addteam() {
 		$teamid = 0;
@@ -24,22 +31,21 @@ class TeamsController extends AppController {
 		$team -> schule = $this -> request -> data["school"];
 		$spielersController = new SpielersController;
 		$spielersController -> constructClasses();
-		
+
 		$error = "noerror";
 
 		if ($team -> teamname == "") {
 			http_response_code(400);
-			$error = "TeamNameMissing";
+			$error = "registerTeamNameMissing";
 		} else if ($team -> schule == "") {
-			$error = "SchoolNameMissing";
+			$error = "registerSchoolNameMissing";
 			http_response_code(400);
-		} else if(count($this -> request ->data["members"]) < 4 || count($this -> request ->data["members"]) > 7) {
-			$error = "WrongPlayerCount";
+		} else if (count($this -> request -> data["members"]) < 4 || count($this -> request -> data["members"]) > 7) {
+			$error = "registerWrongPlayerCount";
 			debug("Wrong number of players");
 			http_response_code(400);
-		}
-		else if ($this -> checkMembers($this -> request -> data["members"]) == 1) {
-			$error = "WrongPlayerData";
+		} else if ($this -> checkMembers($this -> request -> data["members"]) == 1) {
+			$error = "registerWrongPlayerData";
 			debug("Wrong player data!!!");
 			http_response_code(400);
 		} else {
@@ -79,7 +85,7 @@ class TeamsController extends AppController {
 				return 1;
 			else if ($value["phone"] == "")
 				return 1;
-			else if ($value["dateofbirth"] == "" || $this->checkDateOfBirth($value["dateofbirth"]) == 1)
+			else if ($value["dateofbirth"] == "" || $this -> checkDateOfBirth($value["dateofbirth"]) == 1)
 				return 1;
 		}
 
@@ -94,6 +100,46 @@ class TeamsController extends AppController {
 		if ($player_date >= $end_date || $player_date <= $start_date)
 			return 1;
 		return 0;
+	}
+
+	public function login() {
+		$this->request->params['User']['username'] = $this -> request -> data["name"];
+		$this->request->params['User']['password'] = "Hak Grazbachgasse";
+		//$tmpUser['User']['teamname'] = $this -> request -> data["name"];
+		$return = "unknownError";
+		$teamname = $this -> request -> data["name"];
+
+		$this -> Session -> destroy();
+
+		if ($teamname == "") {
+			http_response_code(400);
+			$return = "loginNameMissing";
+		}
+
+		echo json_encode($this-> request);
+		if ($this -> Auth -> login()) {
+			$return = "success";
+		} else {
+			$return = "fail";
+			//$this -> Session -> setFlash(__('Invalid username or password, try again'));
+		}
+
+		/*$foundTeam = $this -> Team -> find('all', array('conditions' => array('LOWER(teamname)' => strtolower($name))));
+		 if (count($foundTeam) == 1) {
+		 $return = $foundTeam[0];
+		 $this -> Session -> write('Team', $return);
+		 } else if (count($foundTeam) > 1) {
+		 http_response_code(400);
+		 $return = "loginFoundMoreThanOneTeam";
+		 } else {
+		 $refereesController = new RefereesController;
+		 $refereesController -> constructClasses();
+
+		 $refereesController -> login($name);
+
+		 }*/
+
+		$this -> set('teams', $return);
 	}
 
 }

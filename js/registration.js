@@ -29,17 +29,17 @@ function handleError(errorMsg) {
 	var nav = new Navigation();
 	nav.loadPage("registration.html");
 	switch(errorMsg) {
-	case errorCodes.schoolNameMissing:
-		alert(errorMessages.schoolNameMissing);
+	case errorCodes.registerSchoolNameMissing:
+		alert(errorMessages.registerSchoolNameMissing);
 		break;
-	case errorCodes.teamNameMissing:
-		alert(errorMessages.teamNameMissing);
+	case errorCodes.registerTeamNameMissing:
+		alert(errorMessages.registerTeamNameMissing);
 		break;
-	case errorCodes.wrongPlayerData:
-		alert(errorMessages.wrongPlayerData);
+	case errorCodes.registerWrongPlayerData:
+		alert(errorMessages.registerWrongPlayerData);
 		break;
-	case errorCodes.wrongPlayerCount:
-		alert(errorMessages.wrongPlayerCount);
+	case errorCodes.registerWrongPlayerCount:
+		alert(errorMessages.registerWrongPlayerCount);
 		break;
 	default:
 		alert(errorMessages.unknownError);

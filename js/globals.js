@@ -10,17 +10,21 @@ team = {
 };
 
 errorCodes = {
-	schoolNameMissing : "SchoolNameMissing",
-	teamNameMissing : "TeamNameMissing",
-	wrongPlayerData: "WrongPlayerData",
-	wrongPlayerCount: "WrongPlayerCount",
-	unknownError: "UnknownError"
+	registerSchoolNameMissing : "registerSchoolNameMissing",
+	registerTeamNameMissing : "registerTeamNameMissing",
+	registerWrongPlayerData: "registerWrongPlayerData",
+	registerWrongPlayerCount: "registerWrongPlayerCount",
+	loginNameMissing: "loginNameMissing",
+	loginFoundMoreThanOneTeam: "loginFoundMoreThanOneTeam",
+	unknownError: "unknownError"
 };
 errorMessages = {
-	schoolNameMissing : "Dein Team konnte nicht gespeichert werden da der Name deiner Schule fehlt. Bitte probiere es erneut!",
-	teamNameMissing : "Dein Team konnte nicht gespeichert werden da der Name deines Teams fehlt. Bitte probiere es erneut!",
-	wrongPlayerData: "Du hast bei mindestens einem Spieler keine oder falsche Daten eingegeben. Bitte probiere es erneut!",
-	wrongPlayerCount: "Du hast nicht die richtige Anzahl an Spielern eingegeben. Bitte probiere es erneut!",
+	registerSchoolNameMissing : "Dein Team konnte nicht gespeichert werden da der Name deiner Schule fehlt. Bitte probiere es erneut!",
+	registerTeamNameMissing : "Dein Team konnte nicht gespeichert werden da der Name deines Teams fehlt. Bitte probiere es erneut!",
+	registerWrongPlayerData: "Du hast bei mindestens einem Spieler keine oder falsche Daten eingegeben. Bitte probiere es erneut!",
+	registerWrongPlayerCount: "Du hast nicht die richtige Anzahl an Spielern eingegeben. Bitte probiere es erneut!",
+	loginNameMissing: "Du hast keinen Namen eingegeben. Bitte probiere es erneut!",
+	loginFoundMoreThanOneTeam: "DU SOLLTEST DRINGEND ZUR SPIELLEITUNG GEHEN. Bitte probiere es nicht erneut!", //TODO email schicken
 	unknownError: "Ein unbekannter Fehler ist aufgetreten :( Bitte probiere es erneut!"
 };
 
