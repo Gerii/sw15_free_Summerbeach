@@ -9,6 +9,8 @@ team = {
 	}
 };
 
+loginName = "";
+
 errorCodes = {
 	registerSchoolNameMissing : "registerSchoolNameMissing",
 	registerTeamNameMissing : "registerTeamNameMissing",

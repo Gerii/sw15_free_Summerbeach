@@ -103,42 +103,32 @@ class TeamsController extends AppController {
 	}
 
 	public function login() {
-		$this->request->params['User']['username'] = $this -> request -> data["name"];
-		$this->request->params['User']['password'] = "Hak Grazbachgasse";
-		//$tmpUser['User']['teamname'] = $this -> request -> data["name"];
 		$return = "unknownError";
-		$teamname = $this -> request -> data["name"];
+		$name = $this -> request -> data["username"];
 
 		$this -> Session -> destroy();
 
-		if ($teamname == "") {
+		if ($name == "") {
 			http_response_code(400);
 			$return = "loginNameMissing";
 		}
 
-		echo json_encode($this-> request);
-		if ($this -> Auth -> login()) {
-			$return = "success";
+		//echo json_encode($this -> request);
+
+		$foundTeam = $this -> Team -> find('all', array('conditions' => array('LOWER(teamname)' => strtolower($name))));
+		if (count($foundTeam) == 1) {
+			$return = $foundTeam[0];
+			$this -> Session -> write('Team', $return);
+		} else if (count($foundTeam) > 1) {
+			http_response_code(400);
+			$return = "loginFoundMoreThanOneTeam";
 		} else {
-			$return = "fail";
-			//$this -> Session -> setFlash(__('Invalid username or password, try again'));
+			$refereesController = new RefereesController;
+			$refereesController -> constructClasses();
+			if ($refereesController -> refereeExists($name)) {
+				$return = "thisIsReferee";
+			}
 		}
-
-		/*$foundTeam = $this -> Team -> find('all', array('conditions' => array('LOWER(teamname)' => strtolower($name))));
-		 if (count($foundTeam) == 1) {
-		 $return = $foundTeam[0];
-		 $this -> Session -> write('Team', $return);
-		 } else if (count($foundTeam) > 1) {
-		 http_response_code(400);
-		 $return = "loginFoundMoreThanOneTeam";
-		 } else {
-		 $refereesController = new RefereesController;
-		 $refereesController -> constructClasses();
-
-		 $refereesController -> login($name);
-
-		 }*/
-
 		$this -> set('teams', $return);
 	}
 
