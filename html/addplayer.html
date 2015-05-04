@@ -3,28 +3,28 @@
 	<h1 id="captainCaption" style="display:none;">Teamkapitän</h1>
 	<div class="ui-field-contain">
 		<form id="form_addplayer" action="javascript:nothing();">
-			<input id="firstname" class="textinput-fc" placeholder="Vorname" value="" type="text" >
+			<input id="firstname" class="textinput-fc" placeholder="Vorname *" value="" type="text" required>
 			<br/>
-			<input id="secondname" class="textinput-fc" placeholder="Nachname" value="" type="text">
+			<input id="secondname" class="textinput-fc" placeholder="Nachname *" value="" type="text" required>
 			<br/>
-			<label for="bday">Geburtsdatum </label>
-			<input id="dateofbirth" class="textinput-fc" value="" type="date" min="1950-01-01" max="2001-12-31">
+			<label for="bday">Geburtsdatum *</label>
+			<input id="dateofbirth" class="textinput-fc" value="" type="date" min="1950-01-01" max="2001-12-31" required>
 			<br/>
 			<select name="gender" id="gender">
 				<option value="m">Männlich</option>
 				<option value="w">Weiblich</option>
 			</select>
 			<br/>
-			<input id="address" class="textinput-fc" placeholder="Adresse" value="" type="text">
+			<input id="address" class="textinput-fc" placeholder="Adresse *" value="" type="text" required>
 			<br/>
-			<input id="zip" class="textinput-fc" placeholder="PLZ" value="" type="text">
-			<input id="location" class="textinput-fc" placeholder="Ort" value="" type="text">
+			<input id="zip" class="textinput-fc" placeholder="PLZ *" value="" type="number" required>
+			<input id="location" class="textinput-fc" placeholder="Ort *" value="" type="text" required>
 			<br/>
-			<input id="phone" class="textinput-fc" placeholder="0664 123 45 67" value="" type="tel" >
+			<input id="phone" class="textinput-fc" placeholder="Telefonnummer *" value="" type="tel" required>
 			<br/>
-			<input id="email" class="textinput-fc" placeholder="your@email.at" value="" type="email"  style="display:none;" >
+			<input id="email" class="textinput-fc" placeholder="E-Mail *" value="" type="email" required style="display:none;" >
 			<br/>
-			<label for="bday">Playershirt €x </label>
+			<label for="bday">Playershirt €7 *</label>
 			<select name="tshirt" id="tshirt">
 				<option value="keines">keines</option>
 				<option value="s">S</option>
@@ -33,11 +33,28 @@
 				<option value="xl">XL</option>
 			</select>
 			<br/>
-			<input type="submit" class="ui-shadow ui-btn ui-corner-all" id="addMember" value= "Spieler hinzufügen" style="display:none;"/>
+			<span id="addMemberArea" style="display:none;">
+				<input type="submit" formaction="javascript:addMemberTrue()" class="ui-shadow ui-btn ui-corner-all" id="addMember" value= "Weiter"/>
+			</span>
 			<br/>
-			<input type="submit" class="ui-shadow ui-btn ui-corner-all" id="registerTeam" value="Absenden" style="display:none;"/>
 		</form>
+
+		<!--<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">Delete page...</a>-->
+
+	</div>
+
+</div>
+
+<div data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+	    
+	<div role="main" class="ui-content">
+		        <h3 class="ui-title">Du kannst die Registrierung jetzt absenden oder einen weiteren Spieler hinzufügen.</h3>
+		    
+		<input type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" id="addAnotherMember" style="display:none;" value="Weiteren Spieler hinzufügen"/>
+		<input type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" id="registerTeam" value="Registrierung abschließen"/>
+		   
 	</div>
 </div>
+
 <script src="../js/registration.js"></script>
 

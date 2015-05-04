@@ -49,26 +49,11 @@ class RefereesController extends AppController {
 		parent::beforeFilter();
 		// Allow users to register and logout.
 		//Security::setHash("Blowfish");
-		$this -> Auth -> allow('add', 'logout', 'ath');
+		$this -> Auth -> allow('add', 'logout', 'login');
 		$this -> Auth -> autoRedirect = false;
 	}
 
 	public function login() {
-		$return = "failedToLogIn";
-		$this -> Session -> destroy();
-		if ($this -> request -> is('post')) {
-			if ($this -> Auth -> login()) {
-				//$this -> Session -> setFlash(__('I am in the if3'));
-				$return = "successfullyLoggedIn";
-				$this -> Session -> setFlash(__('Valid username or password, dont try again'));
-				//return $this -> redirect($this -> Auth -> redirectUrl());
-			} else
-				$this -> Session -> setFlash(__('Invalid username or password, try again'));
-		}
-		$this -> set('teams', $return);
-	}
-
-	public function ath() {
 		$return = "failedToLogIn";
 		$this -> Session -> destroy();
 		if ($this -> request -> is('post')) {

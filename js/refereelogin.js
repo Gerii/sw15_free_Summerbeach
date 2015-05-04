@@ -1,26 +1,32 @@
-function login() {
-	var nav = new Navigation();
+function loginReferee() {
+			var nav = new Navigation();
+	if (loginName === "" || $("#passwordReferee").val() == undefined || $("#passwordReferee").val() === "") {
+		alert(errorMessages.unknownError);
+		nav.loadPage("home.html");
+	}
 	$.ajax({
 		type : "POST",
-		url : "http://" + $(location).attr('host') + "/Cakephp/Teams/login",
+		url : "http://" + $(location).attr('host') + "/Cakephp/Referees/login",
 		dataType : "json",
 		data : {
-			"username" : $("#teamname").val()
+			"referee" : {
+				"username" : loginName,
+				"password" : $("#passwordReferee").val()
+			}
 		},
 		async : false,
 		success : function(msg) {
 			console.log(msg);
-			if (msg === "thisIsReferee") {
-
-				loginName = $("#teamname").val();
-				nav.loadPage("refereelogin.html");
-			} else if (msg === "foundTeam") {
-				nav.loadPage("team.html");
-			} else if (msg !== "noerror") {
+			if(msg === "successfullyLoggedIn") {
+				nav.loadPage("referee.html");
+			}
+			else if (msg !== "noerror") {
 				handleError(msg);
 			}
+			loginName = "";
 		},
 		error : function(err) {
+			loginName = "";
 			console.log("error");
 			console.log(err);
 			handleError(err);

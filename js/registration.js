@@ -1,6 +1,8 @@
 function register() {
 	console.log("call register");
-
+	if (!addMember(false)) {
+		return;
+	}
 	$.ajax({
 		type : "POST",
 		url : "http://" + $(location).attr('host') + "/Cakephp/Teams/addteam",
@@ -47,19 +49,7 @@ function handleError(errorMsg) {
 	}
 }
 
-
-$("#registerTeam").on("click", function() {
-	console.log("registering");
-	register();
-});
-$("#addMember").on("click", function() {
-	console.log("adding member");
-	addMember();
-});
-
-
 $(document).ready(function() {
-
 	if (team.members.length === 0) {
 		$("#captainCaption").show();
 		$("#email").show();
@@ -68,17 +58,26 @@ $(document).ready(function() {
 	}
 
 	if (team.members.length < 7) {
-		$("#addMember").show();
+		$("#addMemberArea").show();
+	} else {
+		$("#addMemberArea").hide();
 	}
 
-	if (team.members.length > 3) {
-		$("#registerTeam").show();
+	if (team.members.length >= 3) {
+		$("#registerTeamArea").show();
 	}
 
+	$("#addAnotherMember").click(addAnotherMember);
+	$("#registerTeam").click(register);
+	
+	
 	//Safari hack
 	if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+
 		var forms = document.getElementsByTagName('form');
 		for (var i = 0; i < forms.length; i++) {
+			//alert("Apple hack");
+			//confirm("apple hack");
 			forms[i].noValidate = true;
 			forms[i].addEventListener('submit', function(event) {
 				//Prevent submission if checkValidity on the form returns false.
@@ -99,7 +98,6 @@ function addTeam() {
 }
 
 function getMember() {
-
 	return {
 		firstname : $("#firstname").val(),
 		secondname : $("#secondname").val(),
@@ -114,18 +112,44 @@ function getMember() {
 	};
 }
 
-function addMember() {
-	if (team.members.length < 7) {
+function addAnotherMember() {
+	team.members[team.members.length] = getMember();
+	var nav = new Navigation();
+	nav.loadPage("addplayer.html");
+}
+
+function addMember(loadAddPlayerPage) {
+	if ($("#zip").val().length > 4) {
+		alert("PLZ ist zu lang.");
+		$("#zip").focus();
+	} else if (isNaN($("#zip").val())) {
+		alert("Die PLZ sollte eine Zahl sein.");
+		$("#zip").focus();
+	} else if (team.members.length >= 3 && team.members.length < 7) {
+		console.log("popup");
+		$("#addAnotherMember").show();
+		$("#popupDialog").popup("open");
+	} else if (team.members.length === 7) {
+		$("#popupDialog").popup("open");
+	} else if (team.members.length < 7) {
 		console.log("addMember");
 		team.members[team.members.length] = getMember();
-		var nav = new Navigation();
-		nav.loadPage("addplayer.html");
+		if (loadAddPlayerPage) {
+			var nav = new Navigation();
+			nav.loadPage("addplayer.html");
+		}
+		return true;
 	} else {
 
 	}
+	return false;
 }
 
+//Firefox hack
+function addMemberTrue() {
+	addMember(true);
+}
 
-function nothing(){
-	
+function nothing() {
+
 }

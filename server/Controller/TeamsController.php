@@ -117,8 +117,8 @@ class TeamsController extends AppController {
 
 		$foundTeam = $this -> Team -> find('all', array('conditions' => array('LOWER(teamname)' => strtolower($name))));
 		if (count($foundTeam) == 1) {
-			$return = $foundTeam[0];
-			$this -> Session -> write('Team', $return);
+			$return = "foundTeam";
+			$this -> Session -> write('Team', $foundTeam[0]);
 		} else if (count($foundTeam) > 1) {
 			http_response_code(400);
 			$return = "loginFoundMoreThanOneTeam";
