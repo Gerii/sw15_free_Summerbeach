@@ -31,11 +31,11 @@ errorMessages = {
 };
 
 test_team = {
-  "name": "awegawe",
+  "name": "testteam",
   "school": "awefawe",
   "members": [
     {
-      "firstname": "weawe",
+      "firstname": "1weawe",
       "secondname": "asda",
       "dateofbirth": "2001-12-12",
       "gender": "m",
@@ -47,7 +47,7 @@ test_team = {
       "tshirt": "keines"
     },
     {
-      "firstname": "awgeawefa",
+      "firstname": "2awgeawefa",
       "secondname": "wefawe",
       "dateofbirth": "2001-12-19",
       "gender": "m",
@@ -59,7 +59,7 @@ test_team = {
       "tshirt": "keines"
     },
     {
-      "firstname": "agaewgawe",
+      "firstname": "3agaewgawe",
       "secondname": "agregaew",
       "dateofbirth": "2001-12-09",
       "gender": "m",
@@ -71,7 +71,31 @@ test_team = {
       "tshirt": "keines"
     },
     {
-      "firstname": "egawea",
+      "firstname": "4egawea",
+      "secondname": "agerawe",
+      "dateofbirth": "2001-12-13",
+      "gender": "m",
+      "address": "afwegawe",
+      "zip": "346546",
+      "location": "asgdwae",
+      "phone": "435246",
+      "email": "",
+      "tshirt": "keines"
+    },
+    {
+      "firstname": "5egawea",
+      "secondname": "agerawe",
+      "dateofbirth": "2001-12-13",
+      "gender": "m",
+      "address": "afwegawe",
+      "zip": "346546",
+      "location": "asgdwae",
+      "phone": "435246",
+      "email": "",
+      "tshirt": "keines"
+    },
+    {
+      "firstname": "6egawea",
       "secondname": "agerawe",
       "dateofbirth": "2001-12-13",
       "gender": "m",

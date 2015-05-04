@@ -2,7 +2,7 @@
 <div id="addplayer">
 	<h1 id="captainCaption" style="display:none;">Teamkapitän</h1>
 	<div class="ui-field-contain">
-		<form id="form_addplayer" action="javascript:nothing();">
+		<form id="form_addplayer" action="javascript:addMember();">
 			<input id="firstname" class="textinput-fc" placeholder="Vorname *" value="" type="text" required>
 			<br/>
 			<input id="secondname" class="textinput-fc" placeholder="Nachname *" value="" type="text" required>
@@ -34,7 +34,7 @@
 			</select>
 			<br/>
 			<span id="addMemberArea" style="display:none;">
-				<input type="submit" formaction="javascript:addMemberTrue()" class="ui-shadow ui-btn ui-corner-all" id="addMember" value= "Weiter"/>
+				<input type="submit" class="ui-shadow ui-btn ui-corner-all" id="addMember" value= "Weiter"/>
 			</span>
 			<br/>
 		</form>
@@ -49,8 +49,9 @@
 	    
 	<div role="main" class="ui-content">
 		        <h3 class="ui-title">Du kannst die Registrierung jetzt absenden oder einen weiteren Spieler hinzufügen.</h3>
-		    
+		<span id="addAnotherMemberArea" style="display:none;">   
 		<input type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" id="addAnotherMember" style="display:none;" value="Weiteren Spieler hinzufügen"/>
+		</span>
 		<input type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" id="registerTeam" value="Registrierung abschließen"/>
 		   
 	</div>

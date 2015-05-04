@@ -42,11 +42,9 @@ class TeamsController extends AppController {
 			http_response_code(400);
 		} else if (count($this -> request -> data["members"]) < 4 || count($this -> request -> data["members"]) > 7) {
 			$error = "registerWrongPlayerCount";
-			debug("Wrong number of players");
 			http_response_code(400);
 		} else if ($this -> checkMembers($this -> request -> data["members"]) == 1) {
 			$error = "registerWrongPlayerData";
-			debug("Wrong player data!!!");
 			http_response_code(400);
 		} else {
 
@@ -73,7 +71,7 @@ class TeamsController extends AppController {
 	}
 
 	function checkMembers($members) {
-		debug("checking member");
+
 		$counter = 0;
 		foreach ($members as $value) {
 			$counter++;
@@ -133,3 +131,9 @@ class TeamsController extends AppController {
 	}
 
 }
+
+/*function checkEmail($email)
+{
+  $email_valid = filter_var($mail, FILTER_VALIDATE_EMAIL);
+  $this -> set('teams', $return);
+}*/
