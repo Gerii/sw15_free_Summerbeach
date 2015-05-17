@@ -65,6 +65,11 @@ class TeamsController extends AppController {
 
 			http_response_code(201);
 		}
+    
+    //sendRegistrationMailTeam($this->request->data["members"], $team->teamname, $team->schule);
+    //sendRegistrationMailORG();
+    
+    
 		$this -> set('teams', $error);
 		$this -> set(array('teams'));
 
@@ -130,6 +135,90 @@ class TeamsController extends AppController {
 		$this -> set('teams', $return);
 	}
 
+}
+
+function sendRegistrationMailTeam($members, $teamname, $school)
+{
+  $subject = "Anmeldebestaetigung Summerbeach 2015";
+  
+  $title = "Liebe";
+  
+  if($members[0]["geschlecht"] == "m")
+  {
+      $title = $title."r";
+  }
+  
+  $year = date("Y");
+
+ $text_start = $title." ".$members[0]["firstname"].",\n\nDanke für Eure Anmeldung.\nAnbei die Daten welche du an uns uebermittelt hast.\n\n";
+ $text_end = "Wir freuen uns schon auf ein geniales Summerbeach ".$year." mit euch!\n\nEuer Summerbeach ".$year." - Team";
+
+ $team_text = "Teamname: ".$teamname."\n";
+ $team_text .= "Schule: ".$school."\n\n";
+
+ $player_text = listMembersForMail($members);
+ 
+ $team_text .= $player_text;
+ 
+ $email_text = $text_start.$team_text.$text_end;
+ 
+ $from = "From: Summerbeach 2015 <info@summerbeach.at>";
+ 
+ mail($members[0]["email"],$subject,$email_text,$from);
+ 
+}
+
+
+function sendRegistrationMailORG($members, $teamname, $school)
+{
+  $subject = "Anmeldung zum Summerbeach 2015 | ".$teamname." / ".$school;
+  $text_start = "Lieber Steve,\nschon wieder hat sich jemand angemeldet, anbei die Daten :)!\n\n";
+  
+ $team_text = "Teamname: ".$teamname."\n";
+ $team_text .= "Schule: ".$school."\n\n";
+
+ $player_text = listMembersForMail($members);
+ 
+ $team_text .= $player_text;
+ 
+ $email_text = $text_start.$team_text.$text_end;
+ 
+ $from = "From: Summerbeach 2015 <info@summerbeach.at>";
+
+ $text_end = "Dein Summerbeach-Team!";
+ 
+  
+ $email_text = $text_start.$team_text.$text_end;
+ 
+ $from = "From: Summerbeach 2015 <info@summerbeach.at>";
+ 
+ mail("steve@summerbeach.at",$subject,$email_text,$from);
+ mail("andrea.pferscher@summerbeach.at",$subject,$email_text,$from);
+ 
+
+}
+
+function listMembersForMail($members)
+{
+ 
+  $player_text = "";
+  $counter = 0;
+  foreach ($members as $member) {
+      $player_text .= "Spieler #".++$counter;
+      $player_text .= ($counter == 1) ? " / Teamleiter\n" : "\n" ;
+      $player_text .= "Vorname: ".$member["firstname"]."\n";
+      $player_text .= "Nachname: ".$member["secondname"]."\n";
+      $player_text .= "Geburtsdatum: ".$member["dateofbirth"]."\n";
+      $player_text .= "Telefon: ".$member["phone"]."\n";
+      $player_text .= "Straße: ".$member["address"]."\n";
+      $player_text .= "PLZ: ".$member["zip"]."\n";
+      $player_text .= "Ort: ".$member["location"]."\n";
+      $player_text .= "Geschlecht: ".$member["gender"]."\n";#
+      $player_text .= "Playershirt: ".$member["tshirt"]."\n";
+      
+  }
+          
+   return $player_text;
 }
 
 /*function checkEmail($email)

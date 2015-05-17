@@ -17,6 +17,9 @@ class SpielersController extends AppController {
 	public $components = array('Session', 'RequestHandler');
 
 	public function addmember($teamid, $member, $playernumber) {
+	  
+    $gender = ($member["gender"] == "f") ? "w" : "m" ;
+    
 		$db = ConnectionManager::getDataSource('default');
 
 		$memberGerman = new stdClass;
@@ -30,7 +33,7 @@ class SpielersController extends AppController {
 		$memberGerman -> plz = $member["zip"];
 		$memberGerman -> ort = $member["location"];
 		$memberGerman -> email = $member["email"];
-		$memberGerman -> geschlecht = $member["gender"];
+		$memberGerman -> geschlecht = $gender;
 		$memberGerman -> shirt = $member["tshirt"];
 		
 
