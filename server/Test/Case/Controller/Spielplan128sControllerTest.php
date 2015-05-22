@@ -34,4 +34,9 @@ class Spielplan128sControllerTest extends ControllerTestCase {
 		$result = $this -> generate("Spielplan128s") -> findOpponent("T", 29, false);
 		$this -> assertEqual($result, "alreadylost");
 	}
+	public function testFindOpponentFourGames() {
+		$result = $this -> generate("Spielplan128s") -> findOpponent("T", 18, false);
+		$this -> assertEqual($result["name"], "Herta 1");
+		$this -> assertEqual($result["location"], "2");	
+	}
 }
