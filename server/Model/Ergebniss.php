@@ -4,7 +4,7 @@ App::uses('AppModel', 'Model');
  * Ergebnisse Model
  *
  */
-class Ergebnisse extends AppModel {
+class Ergebniss extends AppModel {
 
 /**
  * Use table

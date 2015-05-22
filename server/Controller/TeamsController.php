@@ -222,10 +222,53 @@ function sendRegistrationMailORG($members, $teamname, $school)
   }
   public function acquireTeamNameForStartNumber($start_number)
   {
-        $foundTeam = $this -> Team -> find('all', array('conditions' => array('startnummer' => $start_number)));
-        return $foundTeam[0]['Team']['teamname'];
+  	
+	$opponent_startnumber = substr($start_number, 1);
+	$opponent_prefix = substr($start_number, 0,1);
+	
+	if($opponent_prefix == "T")
+	{
+		$foundTeam = $this -> Team -> find('all', array('conditions' => array('startnummer' => $opponent_startnumber)));
+		return $foundTeam[0]['Team']['teamname'];
+	}
+	else 
+	{
+		$planController = new Spielplan128sController;
+		$planController -> constructClasses();
+		
+		$game = $planController -> Spielplan128 -> find('all', array('conditions' => array('spielnummer' => $opponent_startnumber)));
+		$result = $planController -> getResult($opponent_startnumber);
+		
+		if($result != 0)
+		{
+			if($opponent_prefix == "S")
+			{
+				if($result == 1)
+				{
+					return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_1']);
+				}
+				else 
+				{
+					return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_2']);
+				}
+			}
+			else if($opponent_prefix == "V")
+			{
+				if($result == 1)
+				{
+					return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_2']);
+				}
+				else 
+				{
+					return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_1']);
+				}
+			}
+		}
+		else
+		{
+			return "Gegner nicht bekannt!";
+		}
+	}
   }
 
-
-
-}
+  }

@@ -12,18 +12,23 @@ class ErgebnissesController extends AppController {
  * @var mixed
  */
 	public $scaffold;
+		public $components = array('Session', 'RequestHandler', 'Auth');
+			public function beforeFilter() {
+		parent::beforeFilter();
+		$this -> Auth -> allow();
+	}
   public function checkIfResultExists($game_number)
   {
-      $foundResult = $this -> Ergebnisse -> find('all', array('conditions' => array('spielnummer' => $game_number)));
-      if(count(foundResult) == 0)
+      $foundResult = $this -> Ergebniss -> find('all', array('conditions' => array('spielnummer' => $game_number)));
+      if(count($foundResult) == 0)
       {
         return 0;
       }
-      else if($foundResult[0]['Ergebnisse']['gewinner'] == 1)
+      else if($foundResult[0]['Ergebniss']['gewinner'] == 1)
       {
         return 1;
       }
-      else if($foundResult[0]['Ergebnisse']['gewinner'] == 2)
+      else if($foundResult[0]['Ergebniss']['gewinner'] == 2)
       {
         return 2;
       }

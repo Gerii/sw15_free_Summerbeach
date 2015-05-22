@@ -7,6 +7,11 @@ function findOpponent() {
     async : false,
     success : function(opponent) {
       console.log(opponent);
+      if(opponent === "alreadylost")
+      {
+      	$('#teamsite').html("Du bist leider bereits ausgeschieden.");
+      	return;
+      }
       $('#nextGame').html(opponent.name);
       if(opponent.location == 1)
       {
