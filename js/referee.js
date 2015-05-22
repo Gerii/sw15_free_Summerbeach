@@ -1,0 +1,4 @@
+function loadGame()
+{
+	$("#btnArea").show();
+}
