@@ -135,7 +135,7 @@ class TeamsController extends AppController {
 		$this -> set('teams', $return);
 	}
 
-}
+
 
 function sendRegistrationMailTeam($members, $teamname, $school)
 {
@@ -198,31 +198,34 @@ function sendRegistrationMailORG($members, $teamname, $school)
 
 }
 
-function listMembersForMail($members)
-{
- 
-  $player_text = "";
-  $counter = 0;
-  foreach ($members as $member) {
-      $player_text .= "Spieler #".++$counter;
-      $player_text .= ($counter == 1) ? " / Teamleiter\n" : "\n" ;
-      $player_text .= "Vorname: ".$member["firstname"]."\n";
-      $player_text .= "Nachname: ".$member["secondname"]."\n";
-      $player_text .= "Geburtsdatum: ".$member["dateofbirth"]."\n";
-      $player_text .= "Telefon: ".$member["phone"]."\n";
-      $player_text .= "Straße: ".$member["address"]."\n";
-      $player_text .= "PLZ: ".$member["zip"]."\n";
-      $player_text .= "Ort: ".$member["location"]."\n";
-      $player_text .= "Geschlecht: ".$member["gender"]."\n";#
-      $player_text .= "Playershirt: ".$member["tshirt"]."\n";
-      
+  function listMembersForMail($members)
+  {
+   
+    $player_text = "";
+    $counter = 0;
+    foreach ($members as $member) {
+        $player_text .= "Spieler #".++$counter;
+        $player_text .= ($counter == 1) ? " / Teamleiter\n" : "\n" ;
+        $player_text .= "Vorname: ".$member["firstname"]."\n";
+        $player_text .= "Nachname: ".$member["secondname"]."\n";
+        $player_text .= "Geburtsdatum: ".$member["dateofbirth"]."\n";
+        $player_text .= "Telefon: ".$member["phone"]."\n";
+        $player_text .= "Straße: ".$member["address"]."\n";
+        $player_text .= "PLZ: ".$member["zip"]."\n";
+        $player_text .= "Ort: ".$member["location"]."\n";
+        $player_text .= "Geschlecht: ".$member["gender"]."\n";#
+        $player_text .= "Playershirt: ".$member["tshirt"]."\n";
+        
+    }
+            
+     return $player_text;
   }
-          
-   return $player_text;
-}
+  public function acquireTeamNameForStartNumber($start_number)
+  {
+        $foundTeam = $this -> Team -> find('all', array('conditions' => array('startnummer' => $start_number)));
+        return $foundTeam[0]['Team']['teamname'];
+  }
 
-/*function checkEmail($email)
-{
-  $email_valid = filter_var($mail, FILTER_VALIDATE_EMAIL);
-  $this -> set('teams', $return);
-}*/
+
+
+}
