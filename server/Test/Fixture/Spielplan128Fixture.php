@@ -10,14 +10,15 @@ class Spielplan128Fixture extends CakeTestFixture {
  *
  * @var string
  */
-	public $table = 'spielplan128';
-
+	public $table = 'spielplan128_test';
+	public $import = array('model' => 'Spielplan128', 'records' => true, 'connection' => 'default');
+	public $dropTables = false;
 /**
  * Fields
  *
  * @var array
  */
-	public $fields = array(
+	/*public $fields = array(
 		'spielnummer' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 3, 'unsigned' => false, 'key' => 'primary'),
 		'kontrahent_1' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 4, 'collate' => 'utf8_bin', 'charset' => 'utf8'),
 		'kontrahent_2' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 4, 'collate' => 'utf8_bin', 'charset' => 'utf8'),
@@ -26,20 +27,20 @@ class Spielplan128Fixture extends CakeTestFixture {
 			'PRIMARY' => array('column' => 'spielnummer', 'unique' => 1)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_bin', 'engine' => 'MyISAM')
-	);
+	);*/
 
 /**
  * Records
  *
  * @var array
  */
-	public $records = array(
+	/*public $records = array(
 		array(
 			'spielnummer' => 1,
-			'kontrahent_1' => 'Lo',
-			'kontrahent_2' => 'Lo',
+			'kontrahent_1' => 'T1',
+			'kontrahent_2' => 'T128',
 			'ort' => 1
 		),
-	);
+	);*/
 
 }

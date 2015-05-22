@@ -12,7 +12,7 @@ class Spielplan128sControllerTest extends ControllerTestCase {
 	 *
 	 * @var array
 	 */
-	public $fixtures = array('app.spielplan128');
+	//public $fixtures = array('app.spielplan128');
 
 	public function setUp() {
 		parent::setUp();
@@ -20,8 +20,14 @@ class Spielplan128sControllerTest extends ControllerTestCase {
 	}
 
 	public function testFindOpponentFirstGame() {
-		$result = $this -> generate("Spielplan128s") ->  findOpponent("T", 1, false);
-		$this -> assertEqual($result["name"], "KeinTeamSystemAdmin01");
+		$result = $this -> generate("Spielplan128s") -> findOpponent("T", 1, false);
+		$this -> assertEqual($result["name"], "BibelTV");
+		$this -> assertEqual($result["location"], "1");
+	}
+
+	public function testFindOpponentSecondGame() {
+		$result = $this -> generate("Spielplan128s") -> findOpponent("T", 2, false);
+		$this -> assertEqual($result["name"], "Herta 2");
 		$this -> assertEqual($result["location"], "1");
 	}
 
