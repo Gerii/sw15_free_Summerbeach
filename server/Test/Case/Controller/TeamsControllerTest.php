@@ -16,8 +16,6 @@ class TeamsControllerTest extends ControllerTestCase {
 
 	public function setUp() {
 		parent::setUp();
-
-		// Load Contact Model
 		$this -> Team = ClassRegistry::init('Team');
 		$this -> Spieler = ClassRegistry::init('Spieler');
 	}
