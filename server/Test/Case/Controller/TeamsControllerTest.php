@@ -18,6 +18,8 @@ class TeamsControllerTest extends ControllerTestCase {
 		parent::setUp();
 		$this -> Team = ClassRegistry::init('Team');
 		$this -> Spieler = ClassRegistry::init('Spieler');
+		$this -> Spielplan128 = ClassRegistry::init('Spielplanplan128');
+
 	}
 
 	/**
@@ -260,5 +262,25 @@ class TeamsControllerTest extends ControllerTestCase {
 		}
 		return $after - $before;
 	}
+
+
+
+	public function testAcquireTeamNameForStartNumberFirstRound(){
+			$result = $this -> generate("Teams") -> acquireTeamNameForStartNumber("T1");
+			$this -> assertEqual($result, "Beachbox Hartberg");
+	}
+		public function testAcquireTeamNameForStartNumberWinnerPool(){
+			$result = $this -> generate("Teams") -> acquireTeamNameForStartNumber("S2");
+			$this -> assertEqual($result, "4 Frauen und 3 Todesfälle");
+	}
+	public function testAcquireTeamNameForStartNumberLooserPool(){
+			$result = $this -> generate("Teams") -> acquireTeamNameForStartNumber("V2");
+			$this -> assertEqual($result, "Die Anderlen");
+	}
+		public function testAcquireTeamNameForStartNumberWrongNumber(){
+			$result = $this -> generate("Teams") -> acquireTeamNameForStartNumber("T999");
+			$this -> assertEqual($result, "Beachbox Hartberg");
+	}
+	
 
 }
