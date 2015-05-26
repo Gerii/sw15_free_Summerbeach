@@ -49,9 +49,8 @@ class Spielplan128sController extends AppController {
 		$opponent_startnumber = substr($opponent_number, 1);
 		$location = $game[0]['Spielplan128']['ort'];
 		$game_number = $game[0]['Spielplan128']['spielnummer'];
-		
+
 		$opponent_name = $teamsController -> acquireTeamNameForStartNumber($opponent_number);
-		//$opponent_name = "blablabla";
 
 		$winner = $this -> getResult($game_number);
 		//echo json_encode("Winner");
@@ -60,7 +59,7 @@ class Spielplan128sController extends AppController {
 			if ($winner == $weare) {
 				return $this -> findOpponent("S", $game_number, $lost_once);
 			} else {
-				if($lost_once) {
+				if ($lost_once) {
 					return 'alreadylost';
 				}
 				$lost_once = true;
@@ -75,6 +74,32 @@ class Spielplan128sController extends AppController {
 		$resultController = new ErgebnissesController;
 		$resultController -> constructClasses();
 		return $resultController -> checkIfResultExists($game_number);
+	}
+
+	public function getteamsofgame() {
+		$game_number = $this -> request -> data["gamenumber"];
+		$game = $this -> Spielplan128 -> find('all', array('conditions' => array('spielnummer' => $game_number)));
+		$teams;
+		$error = "";
+		if (count($game) == 0) {
+			$error = "noGameFound";
+			$this->response->statusCode(400);
+		} else {
+			$teams = new stdClass;
+			$teamsController = new TeamsController;
+			$teamsController -> constructClasses();
+			$teams -> first_team = $teamsController -> acquireTeamNameForStartNumber($game[0]['Spielplan128']["kontrahent_1"]);
+			$teams -> second_team = $teamsController -> acquireTeamNameForStartNumber($game[0]['Spielplan128']["kontrahent_2"]);
+			if ($teams -> first_team == "noOpponentFound" || $teams -> second_team == "noOpponentFound") {
+				$error = "noOpponentFound";
+				$this->response->statusCode(400);
+			} else {
+				$resultsController = new ErgebnissesController;
+				$resultsController -> constructClasses();
+				$teams -> winner = $resultsController -> checkIfResultExists($game_number);
+			}
+		}
+		$this -> set('teams', ($error == "") ? $teams : $error);
 	}
 
 }

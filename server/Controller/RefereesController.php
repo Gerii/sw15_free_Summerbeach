@@ -58,12 +58,13 @@ class RefereesController extends AppController {
 		$this -> Session -> destroy();
 		if ($this -> request -> is('post')) {
 			if ($this -> Auth -> login()) {
-				//$this -> Session -> setFlash(__('I am in the if3'));
 				$return = "successfullyLoggedIn";
 				$this -> Session -> setFlash(__('Valid username or password, dont try again'));
-				//return $this -> redirect($this -> Auth -> redirectUrl());
-			} else
+				$this->response->statusCode(201);
+			} else {
 				$this -> Session -> setFlash(__('Invalid username or password, try again'));
+				$this->response->statusCode(400);
+			}
 		}
 		$this -> set('teams', $return);
 	}

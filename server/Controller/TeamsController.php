@@ -2,6 +2,7 @@
 App::uses('AppController', 'Controller');
 App::uses('ConnectionManager', 'Model');
 App::uses('SpielersController', 'Controller');
+App::uses('Spielplan128sController', 'Controller');
 App::uses('RefereesController', 'Controller');
 
 /**
@@ -35,17 +36,17 @@ class TeamsController extends AppController {
 		$error = "noerror";
 
 		if ($team -> teamname == "") {
-			http_response_code(400);
+			$this->response->statusCode(400);
 			$error = "registerTeamNameMissing";
 		} else if ($team -> schule == "") {
 			$error = "registerSchoolNameMissing";
-			http_response_code(400);
+			$this->response->statusCode(400);
 		} else if (count($this -> request -> data["members"]) < 4 || count($this -> request -> data["members"]) > 7) {
 			$error = "registerWrongPlayerCount";
-			http_response_code(400);
+			$this->response->statusCode(400);
 		} else if ($this -> checkMembers($this -> request -> data["members"]) == 1) {
 			$error = "registerWrongPlayerData";
-			http_response_code(400);
+			$this->response->statusCode(400);
 		} else {
 
 			//foreach ($this -> request ->data["members"] as $value)
@@ -63,13 +64,12 @@ class TeamsController extends AppController {
 				$spielersController -> addMember($this -> Team -> getLastInsertID(), $value, $counter);
 			}
 
-			http_response_code(201);
+			$this->response->statusCode(201);
 		}
-    
-    //sendRegistrationMailTeam($this->request->data["members"], $team->teamname, $team->schule);
-    //sendRegistrationMailORG();
-    
-    
+
+		//sendRegistrationMailTeam($this->request->data["members"], $team->teamname, $team->schule);
+		//sendRegistrationMailORG();
+
 		$this -> set('teams', $error);
 		$this -> set(array('teams'));
 
@@ -112,7 +112,7 @@ class TeamsController extends AppController {
 		$this -> Session -> destroy();
 
 		if ($name == "") {
-			http_response_code(400);
+			$this->response->statusCode(400);
 			$return = "loginNameMissing";
 		}
 
@@ -123,7 +123,7 @@ class TeamsController extends AppController {
 			$return = "foundTeam";
 			$this -> Session -> write('Team', $foundTeam[0]);
 		} else if (count($foundTeam) > 1) {
-			http_response_code(400);
+			$this->response->statusCode(400);
 			$return = "loginFoundMoreThanOneTeam";
 		} else {
 			$refereesController = new RefereesController;
@@ -131,144 +131,129 @@ class TeamsController extends AppController {
 			if ($refereesController -> refereeExists($name)) {
 				$return = "thisIsReferee";
 			}
+			else {
+				$return = "wrongTeamName";
+				$this->response->statusCode(400);
+			}
 		}
 		$this -> set('teams', $return);
 	}
 
+	function sendRegistrationMailTeam($members, $teamname, $school) {
+		$subject = "Anmeldebestaetigung Summerbeach 2015";
 
+		$title = "Liebe";
 
-function sendRegistrationMailTeam($members, $teamname, $school)
-{
-  $subject = "Anmeldebestaetigung Summerbeach 2015";
-  
-  $title = "Liebe";
-  
-  if($members[0]["geschlecht"] == "m")
-  {
-      $title = $title."r";
-  }
-  
-  $year = date("Y");
+		if ($members[0]["geschlecht"] == "m") {
+			$title = $title . "r";
+		}
 
- $text_start = $title." ".$members[0]["firstname"].",\n\nDanke für Eure Anmeldung.\nAnbei die Daten welche du an uns uebermittelt hast.\n\n";
- $text_end = "Wir freuen uns schon auf ein geniales Summerbeach ".$year." mit euch!\n\nEuer Summerbeach ".$year." - Team";
+		$year = date("Y");
 
- $team_text = "Teamname: ".$teamname."\n";
- $team_text .= "Schule: ".$school."\n\n";
+		$text_start = $title . " " . $members[0]["firstname"] . ",\n\nDanke für Eure Anmeldung.\nAnbei die Daten welche du an uns uebermittelt hast.\n\n";
+		$text_end = "Wir freuen uns schon auf ein geniales Summerbeach " . $year . " mit euch!\n\nEuer Summerbeach " . $year . " - Team";
 
- $player_text = listMembersForMail($members);
- 
- $team_text .= $player_text;
- 
- $email_text = $text_start.$team_text.$text_end;
- 
- $from = "From: Summerbeach 2015 <info@summerbeach.at>";
- 
- mail($members[0]["email"],$subject,$email_text,$from);
- 
-}
+		$team_text = "Teamname: " . $teamname . "\n";
+		$team_text .= "Schule: " . $school . "\n\n";
 
+		$player_text = listMembersForMail($members);
 
-function sendRegistrationMailORG($members, $teamname, $school)
-{
-  $subject = "Anmeldung zum Summerbeach 2015 | ".$teamname." / ".$school;
-  $text_start = "Lieber Steve,\nschon wieder hat sich jemand angemeldet, anbei die Daten :)!\n\n";
-  
- $team_text = "Teamname: ".$teamname."\n";
- $team_text .= "Schule: ".$school."\n\n";
+		$team_text .= $player_text;
 
- $player_text = listMembersForMail($members);
- 
- $team_text .= $player_text;
- 
- $email_text = $text_start.$team_text.$text_end;
- 
- $from = "From: Summerbeach 2015 <info@summerbeach.at>";
+		$email_text = $text_start . $team_text . $text_end;
 
- $text_end = "Dein Summerbeach-Team!";
- 
-  
- $email_text = $text_start.$team_text.$text_end;
- 
- $from = "From: Summerbeach 2015 <info@summerbeach.at>";
- 
- mail("steve@summerbeach.at",$subject,$email_text,$from);
- mail("andrea.pferscher@summerbeach.at",$subject,$email_text,$from);
- 
+		$from = "From: Summerbeach 2015 <info@summerbeach.at>";
 
-}
+		mail($members[0]["email"], $subject, $email_text, $from);
 
-  function listMembersForMail($members)
-  {
-   
-    $player_text = "";
-    $counter = 0;
-    foreach ($members as $member) {
-        $player_text .= "Spieler #".++$counter;
-        $player_text .= ($counter == 1) ? " / Teamleiter\n" : "\n" ;
-        $player_text .= "Vorname: ".$member["firstname"]."\n";
-        $player_text .= "Nachname: ".$member["secondname"]."\n";
-        $player_text .= "Geburtsdatum: ".$member["dateofbirth"]."\n";
-        $player_text .= "Telefon: ".$member["phone"]."\n";
-        $player_text .= "Straße: ".$member["address"]."\n";
-        $player_text .= "PLZ: ".$member["zip"]."\n";
-        $player_text .= "Ort: ".$member["location"]."\n";
-        $player_text .= "Geschlecht: ".$member["gender"]."\n";#
-        $player_text .= "Playershirt: ".$member["tshirt"]."\n";
-        
-    }
-            
-     return $player_text;
-  }
-  public function acquireTeamNameForStartNumber($start_number)
-  {
-  	
-	$opponent_startnumber = substr($start_number, 1);
-	$opponent_prefix = substr($start_number, 0,1);
-	
-	if($opponent_prefix == "T")
-	{
-		$foundTeam = $this -> Team -> find('all', array('conditions' => array('startnummer' => $opponent_startnumber)));
-		return $foundTeam[0]['Team']['teamname'];
 	}
-	else 
-	{
-		$planController = new Spielplan128sController;
-		$planController -> constructClasses();
-		
-		$game = $planController -> Spielplan128 -> find('all', array('conditions' => array('spielnummer' => $opponent_startnumber)));
-		$result = $planController -> getResult($opponent_startnumber);
-		
-		if($result != 0)
-		{
-			if($opponent_prefix == "S")
+
+	function sendRegistrationMailORG($members, $teamname, $school) {
+		$subject = "Anmeldung zum Summerbeach 2015 | " . $teamname . " / " . $school;
+		$text_start = "Lieber Steve,\nschon wieder hat sich jemand angemeldet, anbei die Daten :)!\n\n";
+
+		$team_text = "Teamname: " . $teamname . "\n";
+		$team_text .= "Schule: " . $school . "\n\n";
+
+		$player_text = listMembersForMail($members);
+
+		$team_text .= $player_text;
+
+		$email_text = $text_start . $team_text . $text_end;
+
+		$from = "From: Summerbeach 2015 <info@summerbeach.at>";
+
+		$text_end = "Dein Summerbeach-Team!";
+
+		$email_text = $text_start . $team_text . $text_end;
+
+		$from = "From: Summerbeach 2015 <info@summerbeach.at>";
+
+		mail("steve@summerbeach.at", $subject, $email_text, $from);
+		mail("andrea.pferscher@summerbeach.at", $subject, $email_text, $from);
+
+	}
+
+	function listMembersForMail($members) {
+
+		$player_text = "";
+		$counter = 0;
+		foreach ($members as $member) {
+			$player_text .= "Spieler #" . ++$counter;
+			$player_text .= ($counter == 1) ? " / Teamleiter\n" : "\n";
+			$player_text .= "Vorname: " . $member["firstname"] . "\n";
+			$player_text .= "Nachname: " . $member["secondname"] . "\n";
+			$player_text .= "Geburtsdatum: " . $member["dateofbirth"] . "\n";
+			$player_text .= "Telefon: " . $member["phone"] . "\n";
+			$player_text .= "Straße: " . $member["address"] . "\n";
+			$player_text .= "PLZ: " . $member["zip"] . "\n";
+			$player_text .= "Ort: " . $member["location"] . "\n";
+			$player_text .= "Geschlecht: " . $member["gender"] . "\n";
+			#
+			$player_text .= "Playershirt: " . $member["tshirt"] . "\n";
+
+		}
+
+		return $player_text;
+	}
+
+	public function acquireTeamNameForStartNumber($start_number) {
+
+		$opponent_startnumber = substr($start_number, 1);
+		$opponent_prefix = substr($start_number, 0, 1);
+
+		if ($opponent_prefix == "T") {
+			$foundTeam = $this -> Team -> find('all', array('conditions' => array('startnummer' => $opponent_startnumber)));
+			if(count($foundTeam) == 0)
 			{
-				if($result == 1)
-				{
-					return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_1']);
-				}
-				else 
-				{
-					return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_2']);
-				}
+				return "unknownStartNumber";
 			}
-			else if($opponent_prefix == "V")
-			{
-				if($result == 1)
-				{
-					return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_2']);
+			return $foundTeam[0]['Team']['teamname'];
+		} else {
+			$planController = new Spielplan128sController;
+			$planController -> constructClasses();
+
+			$game = $planController -> Spielplan128 -> find('all', array('conditions' => array('spielnummer' => $opponent_startnumber)));
+			$result = $planController -> getResult($opponent_startnumber);
+
+			if ($result != 0) {
+				if ($opponent_prefix == "S") {
+					if ($result == 1) {
+						return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_1']);
+					} else {
+						return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_2']);
+					}
+				} else if ($opponent_prefix == "V") {
+					if ($result == 1) {
+						return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_2']);
+					} else {
+						return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_1']);
+					}
 				}
-				else 
-				{
-					return $this -> acquireTeamNameForStartNumber($game[0]['Spielplan128']['kontrahent_1']);
-				}
+			} else {
+				return "noOpponentFound";
 			}
 		}
-		else
-		{
-			return "Gegner nicht bekannt!";
-		}
 	}
-  }
 
-  }
+}

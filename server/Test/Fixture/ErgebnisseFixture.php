@@ -10,7 +10,7 @@ class ErgebnisseFixture extends CakeTestFixture {
  *
  * @var string
  */
-	public $table = 'ergebnisse';
+	public $table = 'ergebnisse_test';
 
 /**
  * Fields
@@ -36,7 +36,7 @@ class ErgebnisseFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'spielnummer' => 1,
+			'spielnummer' => 100,
 			'gewinner' => 1,
 			'update' => 1
 		),

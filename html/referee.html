@@ -1,15 +1,16 @@
 <div id="refereeSite">
 	<div class="ui-field-contain">
 		<form action="javascript:loadGame();">
-			<input id="gameNumber" class="textinput-fc" placeholder="Spielnummer" value="" type="text" >
+			<input id="gameNumber" class="textinput-fc" placeholder="Spielnummer" value="" type="number" >
 			<br/>
 			<input type="submit" id="loadGame" class="ui-shadow ui-btn ui-corner-all" value="Ok" />
 		</form>
 	</div>
 	<div id="btnArea" style="display:none;">
-			<input type="button" id="team1Wins" class="ui-shadow ui-btn ui-corner-all"  />
-			<input type="button" id="team2Wins" class="ui-shadow ui-btn ui-corner-all" />
-
+			<a data-role="button" id="team1Wins" class="ui-shadow ui-btn ui-btn-b ui-corner-all" value=""></a>
+			<a data-role="button" id="team2Wins" class="ui-shadow ui-btn ui-btn-b ui-corner-all" value=""></a>
+	</div>
+	<div id="errorArea" class="ui-body ui-body-a ui-corner-all" style="display:none;">
 	</div>
 </div>
 <script src="../js/referee.js"></script>

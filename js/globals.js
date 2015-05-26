@@ -18,6 +18,10 @@ errorCodes = {
 	registerWrongPlayerCount: "registerWrongPlayerCount",
 	loginNameMissing: "loginNameMissing",
 	loginFoundMoreThanOneTeam: "loginFoundMoreThanOneTeam",
+	loginWrongTeamName: "wrongTeamName",
+	loginFailedToLoginReferee: "failedToLogIn",
+	noOpponentFound: "noOpponentFound",
+	noGameFound: "noGameFound",
 	unknownError: "unknownError"
 };
 errorMessages = {
@@ -27,6 +31,11 @@ errorMessages = {
 	registerWrongPlayerCount: "Du hast nicht die richtige Anzahl an Spielern eingegeben. Bitte probiere es erneut!",
 	loginNameMissing: "Du hast keinen Namen eingegeben. Bitte probiere es erneut!",
 	loginFoundMoreThanOneTeam: "DU SOLLTEST DRINGEND ZUR SPIELLEITUNG GEHEN. Bitte probiere es nicht erneut!", //TODO email schicken
+	loginWrongTeamName: "Es existiert kein Team mit diesem Namen!",
+	loginNoPasswordEntered: "Bitte gib ein Passwort ein!",
+	loginFailedToLoginReferee: "Benutzername oder Passwort sind nicht korrekt!",
+	noOpponentFound: "Von diesem Spiel sind noch nicht alle Kontrahenten bekannt.",
+	noGameFound: "Es existiert kein Spiel mit dieser Nummer.",
 	unknownError: "Ein unbekannter Fehler ist aufgetreten :( Bitte probiere es erneut!"
 };
 

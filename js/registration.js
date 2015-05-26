@@ -22,7 +22,7 @@ function register() {
 		error : function(err) {
 			console.log("error");
 			console.log(err);
-			handleError(err);
+			handleError(err.responseJSON);
 		}
 	});
 }

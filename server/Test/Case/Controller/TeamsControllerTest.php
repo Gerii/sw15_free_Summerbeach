@@ -279,7 +279,7 @@ class TeamsControllerTest extends ControllerTestCase {
 	}
 		public function testAcquireTeamNameForStartNumberWrongNumber(){
 			$result = $this -> generate("Teams") -> acquireTeamNameForStartNumber("T999");
-			$this -> assertEqual($result, "Beachbox Hartberg");
+			$this -> assertEqual($result, "unknownStartNumber");
 	}
 	
 

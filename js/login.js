@@ -23,7 +23,7 @@ function login() {
 		error : function(err) {
 			console.log("error");
 			console.log(err);
-			handleError(err);
+			handleError(err.responseJSON);
 		}
 	});
 }
@@ -35,6 +35,9 @@ function handleError(errorMsg) {
 		break;
 	case errorCodes.loginFoundMoreThanOneTeam:
 		alert(errorMessages.loginFoundMoreThanOneTeam);
+		break;
+	case errorCodes.loginWrongTeamName:
+		alert(errorMessages.loginWrongTeamName);
 		break;
 	default:
 		alert(errorMessages.unknownError);

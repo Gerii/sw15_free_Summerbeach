@@ -1,8 +1,8 @@
 function loginReferee() {
-			var nav = new Navigation();
-	if (loginName === "" || $("#passwordReferee").val() == undefined || $("#passwordReferee").val() === "") {
-		alert(errorMessages.unknownError);
-		nav.loadPage("home.html");
+	var nav = new Navigation();
+	if (loginName === "" || $("#passwordReferee").val() === undefined || $("#passwordReferee").val() === "") {
+		alert(errorMessages.loginNoPasswordEntered);
+		return;
 	}
 	$.ajax({
 		type : "POST",
@@ -17,25 +17,26 @@ function loginReferee() {
 		async : false,
 		success : function(msg) {
 			console.log(msg);
-			if(msg === "successfullyLoggedIn") {
+			if (msg === "successfullyLoggedIn") {
 				nav.loadPage("referee.html");
-			}
-			else if (msg !== "noerror") {
+			} else if (msg !== "noerror") {
 				handleError(msg);
 			}
-			loginName = "";
+			//loginName = "";
 		},
 		error : function(err) {
-			loginName = "";
 			console.log("error");
 			console.log(err);
-			handleError(err);
+			handleError(err.responseJSON);
 		}
 	});
 }
 
 function handleError(errorMsg) {
 	switch(errorMsg) {
+	case errorCodes.loginFailedToLoginReferee:
+		alert(errorMessages.loginFailedToLoginReferee);
+		break;
 	case errorCodes.loginNameMissing:
 		alert(errorMessages.loginNameMissing);
 		break;
