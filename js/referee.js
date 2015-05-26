@@ -77,3 +77,16 @@ function handleError(errorMsg) {
 		break;
 	}
 }
+
+
+$(document).ready(function() {
+	console.log("team.js");
+	$("#login\\.html").hide();
+	$("#registration\\.html").hide();
+	$("#logout\\.html").show();
+	$("#referee\\.html").show();
+	findOpponent();
+
+});
+
+

@@ -6,6 +6,19 @@ $(document).on("pagebeforeshow", function() {
 	$(".navbtn").on("click", function() {
 		nav.loadPage($(this).attr("id"));
 	});
+
+	$("#logout\\.html").click(function() {
+		console.log("logout called");
+		$("#login\\.html").show();
+		$("#registration\\.html").show();
+		$("#logout\\.html").hide();
+		$("#team\\.html").hide();
+		$("#referee\\.html").hide();
+		nav.loadPage("home.html");
+		
+		
+		
+	});
 });
 
 Navigation = function() {
