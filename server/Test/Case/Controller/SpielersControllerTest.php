@@ -16,10 +16,7 @@ class SpielersControllerTest extends ControllerTestCase {
 
 	public function setUp() {
 		parent::setUp();
-
-		// Load Contact Model
 		$this -> Spieler = ClassRegistry::init('Spieler');
-
 	}
 
 	public function testAddMember() {
