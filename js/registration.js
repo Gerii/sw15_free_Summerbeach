@@ -51,12 +51,11 @@ function handleError(errorMsg) {
 
 $(document).ready(function() {
 	if (team.members.length === 0) {
-		$("#captainCaption").show();
 		$("#email").show();
 	} else {
 		$("#email").removeAttr("required");
+		$("#captainCaption").html("Spieler " + (team.members.length + 1) );
 	}
-
 	if (team.members.length < 7) {
 		$("#addMemberArea").show();
 	} else {
@@ -75,7 +74,9 @@ $(document).ready(function() {
 	
 	
 	//Safari hack
-	if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+	if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Mac OS X') != -1 && navigator.userAgent.indexOf('Chrome') == -1 &&
+            navigator.userAgent.indexOf('BB10') == -1
+        ) {
 
 		var forms = document.getElementsByTagName('form');
 		for (var i = 0; i < forms.length; i++) {
@@ -86,7 +87,7 @@ $(document).ready(function() {
 				//Prevent submission if checkValidity on the form returns false.
 				if (!event.target.checkValidity()) {
 					event.preventDefault();
-					alert("Bitte fülle alle benötigten Felder aus!");
+					alert("Bitte fülle alle benötigten Felder aus! Stelle sicher, dass die PLZ nicht mehr als vier Stellen hat und die E-Mail korrekt ist.");
 				}
 			}, false);
 		}

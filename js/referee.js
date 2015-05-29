@@ -85,7 +85,7 @@ $(document).ready(function() {
 	$("#registration\\.html").hide();
 	$("#logout\\.html").show();
 	$("#referee\\.html").show();
-	findOpponent();
+	//findOpponent();
 
 });
 

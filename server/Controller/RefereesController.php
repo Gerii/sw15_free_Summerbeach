@@ -70,7 +70,11 @@ class RefereesController extends AppController {
 	}
 
 	public function logout() {
-		return $this -> redirect($this -> Auth -> logout());
+		$this -> Auth -> logout();
+		$this -> Session -> destroy();
+		$this -> set('teams', "successfullyloggedout");
+		
+		//return $this -> redirect($this -> Auth -> logout());
 	}
 
 	public function index() {

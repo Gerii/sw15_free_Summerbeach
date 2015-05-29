@@ -15,9 +15,34 @@ $(document).on("pagebeforeshow", function() {
 		$("#logout\\.html").hide();
 		$("#team\\.html").hide();
 		$("#referee\\.html").hide();
-		nav.loadPage("home.html");
+		logout();
 	});
 });
+
+function logout() {
+	$.ajax({
+		type : "POST",
+		url : "http://" + $(location).attr('host') + "/Cakephp/Referees/logout",
+		dataType : "json",
+		data : {
+			"referee" : {
+				"username" : loginName,
+				"password" : $("#passwordReferee").val()
+			}
+		},
+		async : false,
+		success : function(msg) {
+			console.log(msg);
+			var nav = new Navigation();
+			nav.loadPage("home.html");
+		},
+		error : function(err) {
+			console.log("error");
+			console.log(err);
+			//handleError(err.responseJSON);
+		}
+	});
+}
 
 Navigation = function() {
 	//	this.loadPage("home.html");
@@ -42,10 +67,12 @@ Navigation.prototype.splitUrl = function(url) {
 };
 
 Navigation.prototype.loadPage = function(url) {
-	var tag = "#" + this.splitUrl(url);
+	var site = this.splitUrl(url);
+	var tag = "#" + site;
 	if (tag === "#registration") {
 		team.reset();
 	}
+	$("#heading").html(headings[site]);
 	currentUrlTag = tag;
 	jQuery.mobile.navigate(tag);
 	$.ajax({

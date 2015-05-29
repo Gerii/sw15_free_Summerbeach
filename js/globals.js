@@ -43,6 +43,21 @@ errorMessages = {
 	unknownError: "Ein unbekannter Fehler ist aufgetreten :( Bitte probiere es erneut!"
 };
 
+
+headings = {
+	home : "Startseite",
+	sideevents: "Sideevents",
+	faq: "FAQ",
+	registration: "Turnieranmeldung",
+	addplayer:"Turnieranmeldung",
+	login: "Login",
+	referee: "Schiedsrichterbereich",
+	refereelogin: "Schiedsrichterbereich",
+	team: "Teaminfo",
+	thankyoupage : "Turnieranmeldung"
+};
+
+
 test_team = {
   "name": "testteam",
   "school": "awefawe",
