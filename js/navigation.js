@@ -16,10 +16,6 @@ $(document).on("pagebeforeshow", function() {
 		$("#team\\.html").hide();
 		$("#referee\\.html").hide();
 		nav.loadPage("home.html");
-<<<<<<< .merge_file_TLyZWq
-
-=======
->>>>>>> .merge_file_CVHrvq
 	});
 });
 
