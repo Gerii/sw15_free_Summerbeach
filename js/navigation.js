@@ -81,6 +81,8 @@ $(window).on("navigate", function(event, data) {
 		}, function(result) {
 			console.log(result);
 			$("#content").html(result);
+			$("#content").trigger("create");
+			$(".focused").focus();
 		}, "html");
 		console.log(data.state.info);
 		console.log(data.state.direction);
