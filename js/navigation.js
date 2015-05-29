@@ -1,10 +1,21 @@
 $(document).on("mobileinit", function() {
+
 });
 
 $(document).on("pagebeforeshow", function() {
 	var nav = new Navigation();
 	$(".navbtn").on("click", function() {
 		nav.loadPage($(this).attr("id"));
+	});
+
+	$("#logout\\.html").click(function() {
+		console.log("logout called");
+		$("#login\\.html").show();
+		$("#registration\\.html").show();
+		$("#logout\\.html").hide();
+		$("#team\\.html").hide();
+		$("#referee\\.html").hide();
+		nav.loadPage("home.html");
 	});
 });
 
@@ -43,6 +54,7 @@ Navigation.prototype.loadPage = function(url) {
 			console.log(result);
 			$("#content").html(result);
 			$("#content").trigger("create");
+			$(".focused").focus();
 		},
 		async : true
 	});
@@ -57,17 +69,25 @@ Navigation.prototype.buildUrl = function(hash) {
 	return hash.substr(1, hash.length) + ".html";
 };
 
+function teamEmpty() {
+
+}
+
 $(window).on("navigate", function(event, data) {
 	if (data.state.direction === "back") {
 		var nav = new Navigation();
-
 		var hash = window.location.hash;
+		if (hash === "#registration") {
+			team.reset();
+		}
 		$.post(nav.buildUrl(hash), {
 			sort : "",
 			page : ""
 		}, function(result) {
 			console.log(result);
 			$("#content").html(result);
+			$("#content").trigger("create");
+			$(".focused").focus();
 		}, "html");
 		console.log(data.state.info);
 		console.log(data.state.direction);

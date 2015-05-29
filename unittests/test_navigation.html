@@ -7,6 +7,7 @@
 		<script src="../framework/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 		<link rel="stylesheet" href="../framework/qunit-1.17.1.css">
 		<script src="../framework/qunit-1.17.1.js"></script>
+		<script src="../js/globals.js"></script>
 		<script src="../js/navigation.js"></script>
 		<script>
 			QUnit.test("Split URL", function(assert) {
@@ -28,7 +29,7 @@
 			});
 			QUnit.test("Build Url", function(assert) {
 				var nav = new Navigation();
-				assert.equal(nav.buildUrl("#home"),"home.html");
+				assert.equal(nav.buildUrl("#home"), "home.html");
 			});
 			QUnit.test("Browser back button", function(assert) {
 				var done = assert.async();
@@ -45,6 +46,23 @@
 						}, 100);
 					}, 100);
 				}, 100);
+			});
+
+			QUnit.test("Test team empty", function(assert) {
+				assert.ok(teamEmpty());
+			});
+
+			QUnit.test("Test team  not empty", function(assert) {
+				team.school = "HAK Bulme";
+				team.name = "Testteam";
+				assert.ok(!teamEmpty());
+			});
+
+			QUnit.test("Test team  not empty, has members", function(assert) {
+				team.school = "HAK Bulme";
+				team.name = "Testteam";
+				team.members[0] = test_team.members[0];
+				assert.ok(!teamEmpty());
 			});
 
 		</script>
