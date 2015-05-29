@@ -209,9 +209,8 @@ class TeamsController extends AppController {
 			$player_text .= "PLZ: " . $member["zip"] . "\n";
 			$player_text .= "Ort: " . $member["location"] . "\n";
 			$player_text .= "Geschlecht: " . $member["gender"] . "\n";
-			#
 			$player_text .= "Playershirt: " . $member["tshirt"] . "\n";
-
+			$player_text .= "ÖAMTC Mitgliedschaft: ".$member["oeamtc"] ? "ja" : "nein"."\n";
 		}
 
 		return $player_text;

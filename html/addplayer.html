@@ -3,7 +3,7 @@
 	<h1 id="captainCaption" style="display:none;">Teamkapitän</h1>
 	<div class="ui-field-contain">
 		<form id="form_addplayer" action="javascript:addMember();">
-			<input id="firstname" class="textinput-fc" placeholder="Vorname *" value="" type="text" required>
+			<input id="firstname" class="textinput-fc" placeholder="Vorname *" value="" type="text" required autofocus>
 			<br/>
 			<input id="secondname" class="textinput-fc" placeholder="Nachname *" value="" type="text" required>
 			<br/>
@@ -33,7 +33,12 @@
 				<option value="xl">XL</option>
 			</select>
 			<br/>
+			<label>
+				<input name="oeamtc" id="oeamtc" type="checkbox" checked>
+				Ich möchte kostenlos ÖAMTC Mitglied werden. (15-19 Jahre)</label>
+			<a rel="external" target="_blank" href="../files/Leistungsangebot neue MG 15-19.pdf">Nähere Infos</a>
 			<span id="addMemberArea" style="display:none;">
+				<br/>
 				<input type="submit" class="ui-shadow ui-btn ui-corner-all" id="addMember" value= "Weiter"/>
 			</span>
 			<br/>
@@ -50,7 +55,7 @@
 	<div role="main" class="ui-content">
 		        <h3 class="ui-title">Du kannst die Registrierung jetzt absenden oder einen weiteren Spieler hinzufügen.</h3>
 		<span id="addAnotherMemberArea" style="display:none;">   
-		<input type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" id="addAnotherMember" style="display:none;" value="Weiteren Spieler hinzufügen"/>
+			<input type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" id="addAnotherMember" style="display:none;" value="Weiteren Spieler hinzufügen"/>
 		</span>
 		<input type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" id="registerTeam" value="Registrierung abschließen"/>
 		   

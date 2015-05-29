@@ -32,7 +32,8 @@ class SpielersControllerTest extends ControllerTestCase {
 		$email = "johann.mustermann@email.at";
 		$gender = "m";
 		$tshirt = "s";
-		$data = array('firstname' => $firstname, 'secondname' => $secondname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt);
+		$oeamtc = true;
+		$data = array('firstname' => $firstname, 'secondname' => $secondname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt, 'oeamtc' => $oeamtc);
 
 		$this -> assertEqual($this -> insertMember($team_id, $data, $playernumber), 1);
 	}

@@ -116,7 +116,8 @@ function getMember() {
 		location : $("#location").val(),
 		phone : $("#phone").val(),
 		email : $("#email").val(),
-		tshirt : $("#tshirt").val()
+		tshirt : $("#tshirt").val(),
+		oeamtc: $("#oeamtc").is(':checked')
 	};
 }
 

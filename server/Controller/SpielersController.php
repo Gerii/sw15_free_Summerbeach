@@ -18,7 +18,7 @@ class SpielersController extends AppController {
 
 	public function addmember($teamid, $member, $playernumber) {
 	  
-    $gender = ($member["gender"] == "f") ? "w" : "m" ;
+    $gender = ($member["gender"] == "f") ? "w" : "m";
     
 		$db = ConnectionManager::getDataSource('default');
 
@@ -35,6 +35,7 @@ class SpielersController extends AppController {
 		$memberGerman -> email = $member["email"];
 		$memberGerman -> geschlecht = $gender;
 		$memberGerman -> shirt = $member["tshirt"];
+		$memberGerman -> oeamtc = json_decode($member["oeamtc"]);
 		
 		$this -> Spieler -> create();
 		if ($this -> Spieler -> save($memberGerman)) {
