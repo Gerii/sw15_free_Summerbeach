@@ -12,13 +12,7 @@
 /* Globals */
 /* Font
  -----------------------------------------------------------------------------------------------------------*/
-@font-face {
-	font-family: gandhi-sans;
-	src: url("../fonts/GandhiSans-Regular.otf") format("opentype");
-}
-body {
-	font-family: 'gandhi-sans', serif;
-}
+
 
 html {
 	font-size: 100%;
