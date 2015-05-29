@@ -1,4 +1,5 @@
 $(document).on("mobileinit", function() {
+
 });
 
 $(document).on("pagebeforeshow", function() {
@@ -15,9 +16,7 @@ $(document).on("pagebeforeshow", function() {
 		$("#team\\.html").hide();
 		$("#referee\\.html").hide();
 		nav.loadPage("home.html");
-		
-		
-		
+
 	});
 });
 
@@ -56,6 +55,7 @@ Navigation.prototype.loadPage = function(url) {
 			console.log(result);
 			$("#content").html(result);
 			$("#content").trigger("create");
+			$(".focused").focus();
 		},
 		async : true
 	});

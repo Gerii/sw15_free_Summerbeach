@@ -121,6 +121,12 @@ function getMember() {
 	};
 }
 
+$(document).on('pagecontainershow', function(e, ui){ 
+	alert("q");
+    $("#teamname").focus();
+    $("#teamname").focus();
+});
+
 function addMember() {
   if ($("#zip").val().length > 4) {
     alert("PLZ ist zu lang.");
