@@ -43,6 +43,7 @@ class TeamsControllerTest extends ControllerTestCase {
 		$email1 = "johann.mustermann@email.at";
 		$gender1 = "m";
 		$tshirt1 = "s";
+		$oeamtc1 = true;
 		
 		$playernumber2 = 2;
 		$firstname2 = "Frank";
@@ -55,6 +56,7 @@ class TeamsControllerTest extends ControllerTestCase {
 		$email2 = "johann.mustermann@email.at";
 		$gender2 = "w";
 		$tshirt2 = "s";
+		$oeamtc2 = true;
 		
 		
 		$playernumber3 = 3;
@@ -68,6 +70,7 @@ class TeamsControllerTest extends ControllerTestCase {
 		$email3 = "johann.mustermann@email.at";
 		$gender3 = "m";
 		$tshirt3 = "s";
+		$oeamtc3 = true;
 		
 		
 		$team_id4 = 1;
@@ -82,10 +85,11 @@ class TeamsControllerTest extends ControllerTestCase {
 		$email4 = "johann.mustermann@email.at";
 		$gender4 = "m";
 		$tshirt4 = "s";
-		$data_of_players = array( array('firstname' => $firstname1, 'secondname' => $lastname1, 'dateofbirth' => $dateofbirth1, 'phone' => $phone1, 'address' => $address1, 'zip' => $zip1, 'location' => $location1, 'email' => $email1, 'gender' => $gender1, 'tshirt' => $tshirt1),
-							array('firstname' => $firstname2, 'secondname' => $lastname2, 'dateofbirth' => $dateofbirth2, 'phone' => $phone2, 'address' => $address2, 'zip' => $zip2, 'location' => $location2, 'email' => $email2, 'gender' => $gender2, 'tshirt' => $tshirt2),
-							array('firstname' => $firstname3, 'secondname' => $lastname3, 'dateofbirth' => $dateofbirth3, 'phone' => $phone3, 'address' => $address3, 'zip' => $zip3, 'location' => $location3, 'email' => $email3, 'gender' => $gender3, 'tshirt' => $tshirt3),
-							array('firstname' => $firstname4, 'secondname' => $lastname4, 'dateofbirth' => $dateofbirth4, 'phone' => $phone4, 'address' => $address4, 'zip' => $zip4, 'location' => $location4, 'email' => $email4, 'gender' => $gender4, 'tshirt' => $tshirt4));
+		$oeamtc4 = false;
+		$data_of_players = array( array('firstname' => $firstname1, 'secondname' => $lastname1, 'dateofbirth' => $dateofbirth1, 'phone' => $phone1, 'address' => $address1, 'zip' => $zip1, 'location' => $location1, 'email' => $email1, 'gender' => $gender1, 'tshirt' => $tshirt1, 'oeamtc' => $oeamtc1),
+							array('firstname' => $firstname2, 'secondname' => $lastname2, 'dateofbirth' => $dateofbirth2, 'phone' => $phone2, 'address' => $address2, 'zip' => $zip2, 'location' => $location2, 'email' => $email2, 'gender' => $gender2, 'tshirt' => $tshirt2, 'oeamtc' => $oeamtc2),
+							array('firstname' => $firstname3, 'secondname' => $lastname3, 'dateofbirth' => $dateofbirth3, 'phone' => $phone3, 'address' => $address3, 'zip' => $zip3, 'location' => $location3, 'email' => $email3, 'gender' => $gender3, 'tshirt' => $tshirt3, 'oeamtc' => $oeamtc3),
+							array('firstname' => $firstname4, 'secondname' => $lastname4, 'dateofbirth' => $dateofbirth4, 'phone' => $phone4, 'address' => $address4, 'zip' => $zip4, 'location' => $location4, 'email' => $email4, 'gender' => $gender4, 'tshirt' => $tshirt4, 'oeamtc' => $oeamtc4));
 		
 		
 		
@@ -148,7 +152,9 @@ class TeamsControllerTest extends ControllerTestCase {
 		$email = "johann.mustermann@email.at";
 		$gender = "m";
 		$tshirt = "s";
-		$data_of_players = array( array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt));
+		$oeamtc = true;
+		
+		$data_of_players = array( array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt, 'oeamtc' => $oeamtc));
 
 		$team = "blub";
 		$school = "bluuub";
@@ -170,7 +176,8 @@ class TeamsControllerTest extends ControllerTestCase {
 		$email = "johann.mustermann@email.at";
 		$gender = "m";
 		$tshirt = "s";
-		$data_of_players = array( array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt));
+		$oeamtc = true;
+		$data_of_players = array( array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt, 'oeamtc' => $oeamtc));
 
 		$team = "blub";
 		$school = "bluuub";
@@ -192,7 +199,8 @@ class TeamsControllerTest extends ControllerTestCase {
 		$email = "";
 		$gender = "m";
 		$tshirt = "s";
-		$data_of_players = array( array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt));
+		$oeamtc = true;
+		$data_of_players = array( array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt, 'oeamtc' => $oeamtc));
 
 		$team = "blub";
 		$school = "bluuub";
@@ -214,7 +222,8 @@ class TeamsControllerTest extends ControllerTestCase {
 		$email = "";
 		$gender = "m";
 		$tshirt = "s";
-		$data_of_players = array( array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt));
+		$oeamtc = true;
+		$data_of_players = array( array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt, 'oeamtc' => $oeamtc));
 
 		$team = "blub";
 		$school = "bluuub";
@@ -236,7 +245,8 @@ class TeamsControllerTest extends ControllerTestCase {
 		$email = "";
 		$gender = "m";
 		$tshirt = "s";
-		$data_of_players = array( array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt));
+		$oeamtc = true;
+		$data_of_players = array( array('firstname' => $firstname, 'secondname' => $lastname, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'address' => $address, 'zip' => $zip, 'location' => $location, 'email' => $email, 'gender' => $gender, 'tshirt' => $tshirt, 'oeamtc' => $oeamtc));
 
 		$team = "blub";
 		$school = "bluuub";
