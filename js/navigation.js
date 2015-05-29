@@ -16,7 +16,10 @@ $(document).on("pagebeforeshow", function() {
 		$("#team\\.html").hide();
 		$("#referee\\.html").hide();
 		nav.loadPage("home.html");
+<<<<<<< .merge_file_TLyZWq
 
+=======
+>>>>>>> .merge_file_CVHrvq
 	});
 });
 
@@ -47,6 +50,7 @@ Navigation.prototype.loadPage = function(url) {
 	if (tag === "#registration") {
 		team.reset();
 	}
+	currentUrlTag = tag;
 	jQuery.mobile.navigate(tag);
 	$.ajax({
 		type : "GET",
@@ -70,11 +74,27 @@ Navigation.prototype.buildUrl = function(hash) {
 	return hash.substr(1, hash.length) + ".html";
 };
 
+function teamEmpty() {
+	if (team.name === "" && team.school === "" && team.members.length === 0) {
+		return true;
+	}
+	return false;
+}
+
+
 $(window).on("navigate", function(event, data) {
+	var hash = window.location.hash;
+	if (hash !== "#addplayer" && currentUrlTag === "#addplayer" && !teamEmpty() && !confirm(cancelRegistrationMessage)) {
+		window.history.forward();
+		return;
+	}
 	if (data.state.direction === "back") {
 		var nav = new Navigation();
 
-		var hash = window.location.hash;
+		if (hash === "#registration") {
+			team.reset();
+		}
+
 		$.post(nav.buildUrl(hash), {
 			sort : "",
 			page : ""

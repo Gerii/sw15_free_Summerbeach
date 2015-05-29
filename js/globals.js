@@ -11,6 +11,10 @@ team = {
 
 loginName = "";
 
+currentUrlTag = "#home";
+
+cancelRegistrationMessage = "Wenn du jetzt die Registrierung verlässt, werden alle bereits eingegebenen Daten gelöscht. Möchtest du das wirklich?";
+
 errorCodes = {
 	registerSchoolNameMissing : "registerSchoolNameMissing",
 	registerTeamNameMissing : "registerTeamNameMissing",
