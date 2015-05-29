@@ -1,6 +1,3 @@
-$(document).on("mobileinit", function() {
-
-});
 
 $(document).on("pagebeforeshow", function() {
 	var nav = new Navigation();
@@ -17,6 +14,15 @@ $(document).on("pagebeforeshow", function() {
 		$("#referee\\.html").hide();
 		logout();
 	});
+});
+
+$(document).on({
+  ajaxStart: function() { 
+    $.mobile.loading('show');
+  },
+  ajaxStop: function() {
+    $.mobile.loading('hide');
+  }    
 });
 
 function logout() {
@@ -79,7 +85,6 @@ Navigation.prototype.loadPage = function(url) {
 		type : "GET",
 		url : url,
 		success : function(result) {
-			console.log(result);
 			$("#content").html(result);
 			$("#content").trigger("create");
 			$(".focused").focus();
@@ -125,7 +130,7 @@ $(window).on("navigate", function(event, data) {
 			console.log(result);
 			$("#content").html(result);
 			$("#content").trigger("create");
-			$(".focused").focus();
+	//		$(".focused").focus();
 		}, "html");
 		console.log(data.state.info);
 		console.log(data.state.direction);
